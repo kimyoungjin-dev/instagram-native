@@ -1,26 +1,36 @@
 import React from "react";
-import { Text, View, TouchableOpacity } from "react-native";
-import { AuthProps } from "../utils/AuthParamList";
 import styled from "styled-components/native";
+import SwitchBox from "../Components/SwitchBox";
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
-const Logo = styled.Image`
-  max-width: 50%;
+const Logo = styled.Text`
+  font-size: 50px;
+  color: ${(props) => props.theme.fontColor};
+  font-weight: bold;
 `;
 
-export default function Welcome({ navigation, route }: AuthProps<"Welcome">) {
+const CreateAccount = styled.View`
+  background-color: ${(props) => props.theme.loginBtnColor};
+`;
+
+const CreateAccountText = styled.Text`
+  color: ${(props) => props.theme.fontColor};
+`;
+
+export default function Welcome() {
   return (
     <Container>
-      <Logo
-        resizeMode="contain"
-        source={require("../assets/instagram_logo.png")}
-      />
+      <SwitchBox />
+      <Logo>Instagram</Logo>
+      <CreateAccount>
+        <CreateAccountText>CreateAccount</CreateAccountText>
+      </CreateAccount>
     </Container>
   );
 }
