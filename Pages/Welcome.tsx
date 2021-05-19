@@ -1,23 +1,26 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { AuthProps } from "../utils/AuthParamList";
+import styled from "styled-components/native";
+
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+`;
+
+const Logo = styled.Image`
+  max-width: 50%;
+`;
 
 export default function Welcome({ navigation, route }: AuthProps<"Welcome">) {
   return (
-    <View>
-      <Text>Welcome</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("CreateAccount")}>
-        <View>
-          <Text>go to the Create Account</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-        <View>
-          <Text>Login</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+    <Container>
+      <Logo
+        resizeMode="contain"
+        source={require("../assets/instagram_logo.png")}
+      />
+    </Container>
   );
 }
