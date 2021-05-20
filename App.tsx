@@ -7,6 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import LoggedOutNav from "./Navigator/LoggedOutNav";
 import { Image } from "react-native";
 import ThemeManager from "./styles/ChangeMode";
+import { AppearanceProvider } from "react-native-appearance";
 
 function getImages(images: any) {
   return images.map((image: any) => {
@@ -43,10 +44,12 @@ export default function App() {
   }
 
   return (
-    <ThemeManager>
-      <NavigationContainer>
-        <LoggedOutNav />
-      </NavigationContainer>
-    </ThemeManager>
+    <AppearanceProvider>
+      <ThemeManager>
+        <NavigationContainer>
+          <LoggedOutNav />
+        </NavigationContainer>
+      </ThemeManager>
+    </AppearanceProvider>
   );
 }
