@@ -5,12 +5,14 @@ import { useTheme } from "../styles/ChangeMode";
 
 const SSwitchBox = styled.View`
   position: absolute;
-  top: 50px;
-  right: 0px;
+  top: 100px;
+  right: 10px;
+  align-items: flex-end;
 `;
 
 const SwitchText = styled.Text`
   color: ${(props) => props.theme.fontColor};
+  margin-bottom: 10px;
 `;
 
 export default function SwitchBox() {
