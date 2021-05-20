@@ -5,16 +5,7 @@ import styled from "styled-components/native";
 import AuthButton from "../Components/Auth/AuthButton";
 import AuthLayOut from "../Components/Auth/AuthLayOut";
 import SwitchBox from "../Components/SwitchBox";
-
-const Input = styled.TextInput`
-  background-color: ${(props) => props.theme.fontColor};
-  color: ${(props) => props.theme.bgColor};
-  width: 90%;
-  text-align: center;
-  margin-bottom: 10px;
-  height: 40px;
-  border-radius: 5px;
-`;
+import { Input } from "../Components/Auth/TextInputStyles";
 
 export default function CreateAccount() {
   const theme = useTheme();
@@ -42,12 +33,12 @@ export default function CreateAccount() {
           alignItems: "center",
         }}
         behavior="padding"
-        keyboardVerticalOffset={Platform.OS === "ios" ? 30 : 0}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 0}
       >
         <Input
           placeholder="First Name"
           returnKeyType="next"
-          placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
+          placeholderTextColor={theme.mode === "dark" ? "white" : "black"}
           onSubmitEditing={() => onNext(lastNameRef)}
         />
 
@@ -55,7 +46,7 @@ export default function CreateAccount() {
           ref={lastNameRef}
           placeholder="Last Name"
           returnKeyType="next"
-          placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
+          placeholderTextColor={theme.mode === "dark" ? "white" : "black"}
           onSubmitEditing={() => onNext(usernameRef)}
         />
 
@@ -63,7 +54,7 @@ export default function CreateAccount() {
           ref={usernameRef}
           placeholder="User Name"
           returnKeyType="next"
-          placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
+          placeholderTextColor={theme.mode === "dark" ? "white" : "black"}
           onSubmitEditing={() => onNext(emailRef)}
         />
 
@@ -72,8 +63,9 @@ export default function CreateAccount() {
           placeholder="Password"
           returnKeyType="done"
           secureTextEntry={true}
-          placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
+          placeholderTextColor={theme.mode === "dark" ? "white" : "black"}
           onSubmitEditing={LastInput}
+          lastOne={true}
         />
         <AuthButton onPress={() => null} disabled={true} text="CreateAccount" />
       </KeyboardAvoidingView>
