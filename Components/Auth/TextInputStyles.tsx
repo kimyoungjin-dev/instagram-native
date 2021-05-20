@@ -1,8 +1,8 @@
 import styled from "styled-components/native";
 
 export const Input = styled.TextInput<{ lastOne?: boolean }>`
-  background-color: ${(props) => props.theme.silverColor};
-  color: white;
+  background-color: ${(props) => props.theme.fontColor};
+  color: gray;
   width: 90%;
   margin-bottom: ${(props) => (props.lastOne ? "15" : "8")};
   height: 45px;
