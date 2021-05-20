@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { StatusBar } from "react-native";
+import { Appearance } from "react-native-appearance";
 import { ThemeProvider } from "styled-components/native";
-import { Appearance, AppearanceProvider } from "react-native-appearance";
 import { dark, light } from "./styles";
 import { defaultMode } from "./DefaultMode";
 
@@ -44,9 +44,7 @@ const ManageThemeProvider = ({ children }: IProps) => {
 };
 
 const ThemeManager = ({ children }: IProps) => (
-  <AppearanceProvider>
-    <ManageThemeProvider>{children}</ManageThemeProvider>
-  </AppearanceProvider>
+  <ManageThemeProvider>{children}</ManageThemeProvider>
 );
 
 export default ThemeManager;
