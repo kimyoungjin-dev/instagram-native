@@ -1,11 +1,12 @@
 import React from "react";
-import { GestureResponderEvent } from "react-native";
+import { ActivityIndicator, GestureResponderEvent } from "react-native";
 import styled from "styled-components/native";
 
 interface Props {
   onPress: (event: GestureResponderEvent) => void;
   disabled: boolean;
   text: string;
+  loading: boolean;
 }
 
 const Button = styled.TouchableOpacity`
@@ -24,10 +25,15 @@ const ButtonText = styled.Text`
   font-size: 15px;
 `;
 
-export default function AuthButton({ onPress, disabled, text }: Props) {
+export default function AuthButton({
+  onPress,
+  disabled,
+  text,
+  loading,
+}: Props) {
   return (
     <Button onPress={onPress} disabled={disabled}>
-      <ButtonText>{text}</ButtonText>
+      {loading ? <ActivityIndicator /> : <ButtonText>{text}</ButtonText>}
     </Button>
   );
 }
