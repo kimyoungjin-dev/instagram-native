@@ -11,7 +11,7 @@ interface Props {
 const Button = styled.TouchableOpacity`
   background-color: ${(props) => props.theme.loginBtnColor};
   text-align: center;
-  padding: 10px 9px;
+  padding: 15px 9px;
   border-radius: 5px;
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   width: 90%;

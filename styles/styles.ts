@@ -1,17 +1,17 @@
 import { DefaultTheme } from "styled-components";
 
 export const light: DefaultTheme = {
-  bgColor: "#FAFAFA",
-  fontColor: "rgb(38,38,38)",
+  bgColor: "white",
+  fontColor: "black",
   loginBtnColor: "blue",
   borderColor: "rgb(219,219,219)",
   silverColor: "silver",
 };
 
 export const dark: DefaultTheme = {
-  bgColor: "rgb(38,38,38)",
-  fontColor: "#FAFAFA",
+  bgColor: "black",
+  fontColor: "white",
   loginBtnColor: "blue",
   borderColor: "rgb(219,219,219)",
-  silverColor: "silver",
+  silverColor: "rgba(255,255,255,0.15)",
 };
