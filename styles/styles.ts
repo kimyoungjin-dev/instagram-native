@@ -9,7 +9,7 @@ export const light: DefaultTheme = {
 };
 
 export const dark: DefaultTheme = {
-  bgColor: "rgb(0,0,0,0.8)",
+  bgColor: "rgba(0,0,0,0.8)",
   fontColor: "white",
   loginBtnColor: "red",
   borderColor: "rgb(219,219,219)",

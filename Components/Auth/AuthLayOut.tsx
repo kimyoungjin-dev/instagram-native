@@ -1,6 +1,7 @@
 import React from "react";
 import { Keyboard, Text, TouchableWithoutFeedback } from "react-native";
 import styled from "styled-components/native";
+import { useTheme } from "../../styles/ChangeMode";
 
 const Container = styled.View`
   flex: 1;
@@ -16,7 +17,7 @@ const LogoBox = styled.View`
 `;
 
 const Logo = styled.Image`
-  width: 100%;
+  width: 200px;
   height: 100px;
 `;
 
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export default function AuthLayOut({ children }: Props) {
+  const theme = useTheme();
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
@@ -34,6 +36,7 @@ export default function AuthLayOut({ children }: Props) {
       <Container>
         <LogoBox>
           <Logo
+            style={{ tintColor: theme.mode === "dark" ? "white" : "black" }}
             source={require("../../assets/instagram_logo.png")}
             resizeMode="contain"
           />

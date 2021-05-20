@@ -3,6 +3,7 @@ import { Text, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import AuthButton from "../Components/Auth/AuthButton";
 import AuthLayOut from "../Components/Auth/AuthLayOut";
+import SwitchBox from "../Components/SwitchBox";
 import { AuthProps } from "../utils/AuthParamList";
 
 //프로필 사진 , 유저네임 추가
@@ -25,6 +26,7 @@ export default function Welcome({ navigation }: AuthProps<"Welcome">) {
 
   return (
     <AuthLayOut>
+      <SwitchBox />
       <AuthButton onPress={goToLogin} text="로그인" disabled={false} />
 
       <TouchableOpacity style={{ marginTop: 20 }} onPress={goToLogin}>
@@ -34,7 +36,9 @@ export default function Welcome({ navigation }: AuthProps<"Welcome">) {
       <CreateAcount>
         <Text style={{ color: "silver" }}>instagram에 처음 오셨나요?</Text>
         <TouchableOpacity onPress={goToCreateAccount}>
-          <Text style={{ color: "white", marginLeft: 5 }}>가입하기</Text>
+          <Text style={{ color: "silver", marginLeft: 5, fontSize: 16 }}>
+            가입하기
+          </Text>
         </TouchableOpacity>
       </CreateAcount>
     </AuthLayOut>

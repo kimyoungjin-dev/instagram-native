@@ -1,12 +1,5 @@
 import React, { useRef } from "react";
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  TextInput,
-  TextInputBase,
-  View,
-} from "react-native";
+import { Alert, KeyboardAvoidingView, Platform } from "react-native";
 import AuthButton from "../Components/Auth/AuthButton";
 import AuthLayOut from "../Components/Auth/AuthLayOut";
 import Subtitle from "../Components/Auth/Subtitle";
@@ -15,7 +8,7 @@ import SwitchBox from "../Components/SwitchBox";
 import { useTheme } from "../styles/ChangeMode";
 import { AuthProps } from "../utils/AuthParamList";
 
-export default function Login({ navigation }: AuthProps<"Login">) {
+export default function Login() {
   const theme = useTheme();
   const passwordRef = useRef(null);
 
