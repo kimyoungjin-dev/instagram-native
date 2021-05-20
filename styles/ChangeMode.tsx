@@ -1,4 +1,9 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  SetStateAction,
+} from "react";
 import { StatusBar } from "react-native";
 import { Appearance } from "react-native-appearance";
 import { ThemeProvider } from "styled-components/native";
@@ -11,14 +16,17 @@ interface IProps {
 
 const ThemeContext = createContext({
   mode: defaultMode,
-  setMode: (mode: any) => console.log(mode),
+  setMode: (mode: SetStateAction<"light" | "dark" | "no-preference">) =>
+    console.log(mode),
 });
 
 export const useTheme = () => React.useContext(ThemeContext);
 
 const ManageThemeProvider = ({ children }: IProps) => {
   const [themeState, setThemeState] = useState(defaultMode);
-  const setMode = (mode: any) => {
+  const setMode = (
+    mode: SetStateAction<"light" | "dark" | "no-preference">
+  ) => {
     setThemeState(mode);
   };
 
