@@ -8,6 +8,8 @@ import LoggedOutNav from "./Navigator/LoggedOutNav";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import ThemeManager from "./styles/ChangeMode";
 import { AppearanceProvider } from "react-native-appearance";
+import { ApolloProvider } from "@apollo/client";
+import client from "./Components/Apollo";
 
 const getImages = (images: any) =>
   images.map((image: any) => {
@@ -33,25 +35,24 @@ export default function App() {
     await Promise.all([...images, ...fonts]);
   };
   const onFinish = () => setLoading(false);
+
+  if (loading) {
+    <AppLoading
+      startAsync={loadAssets}
+      onError={console.warn}
+      onFinish={onFinish}
+    />;
+  }
+
   return (
-    <>
-      {loading ? (
-        <>
-          <AppearanceProvider>
-            <ThemeManager>
-              <NavigationContainer>
-                <LoggedOutNav />
-              </NavigationContainer>
-            </ThemeManager>
-          </AppearanceProvider>
-        </>
-      ) : (
-        <AppLoading
-          startAsync={loadAssets}
-          onError={console.warn}
-          onFinish={onFinish}
-        />
-      )}
-    </>
+    <ApolloProvider client={client}>
+      <AppearanceProvider>
+        <ThemeManager>
+          <NavigationContainer>
+            <LoggedOutNav />
+          </NavigationContainer>
+        </ThemeManager>
+      </AppearanceProvider>
+    </ApolloProvider>
   );
 }
