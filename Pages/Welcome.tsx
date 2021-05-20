@@ -1,18 +1,22 @@
 import React from "react";
+import { Text, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import AuthButton from "../Components/Auth/AuthButton";
 import AuthLayOut from "../Components/Auth/AuthLayOut";
-import SwitchBox from "../Components/SwitchBox";
 import { AuthProps } from "../utils/AuthParamList";
 
-const LoginBtn = styled.TouchableOpacity`
-  margin-top: 20px;
+//프로필 사진 , 유저네임 추가
+
+const Another = styled.Text`
+  color: ${(props) => props.theme.loginBtnColor};
 `;
 
-const LoginText = styled.Text`
-  text-align: center;
-  font-size: 18px;
-  color: ${(props) => props.theme.fontColor};
+const CreateAcount = styled.View`
+  position: absolute;
+  bottom: 100px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export default function Welcome({ navigation }: AuthProps<"Welcome">) {
@@ -21,17 +25,18 @@ export default function Welcome({ navigation }: AuthProps<"Welcome">) {
 
   return (
     <AuthLayOut>
-      <SwitchBox />
+      <AuthButton onPress={goToLogin} text="로그인" disabled={false} />
 
-      <AuthButton
-        onPress={() => goToCreateAccount()}
-        disabled={false}
-        text="CreateAccount"
-      />
+      <TouchableOpacity style={{ marginTop: 20 }} onPress={goToLogin}>
+        <Another>다른 계정으로 로그인</Another>
+      </TouchableOpacity>
 
-      <LoginBtn onPress={() => goToLogin()}>
-        <LoginText>Log in</LoginText>
-      </LoginBtn>
+      <CreateAcount>
+        <Text style={{ color: "silver" }}>instagram에 처음 오셨나요?</Text>
+        <TouchableOpacity onPress={goToCreateAccount}>
+          <Text style={{ color: "white", marginLeft: 5 }}>가입하기</Text>
+        </TouchableOpacity>
+      </CreateAcount>
     </AuthLayOut>
   );
 }
