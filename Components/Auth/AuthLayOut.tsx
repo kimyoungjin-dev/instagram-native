@@ -1,4 +1,5 @@
 import React from "react";
+import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import styled from "styled-components/native";
 
 const Container = styled.View`
@@ -21,13 +22,20 @@ const Logo = styled.Text`
 interface Props {
   children: React.ReactNode;
 }
+
 export default function AuthLayOut({ children }: Props) {
+  const dismissKeyboard = () => {
+    Keyboard.dismiss();
+  };
+
   return (
-    <Container>
-      <LogoBox>
-        <Logo>Instagram</Logo>
-      </LogoBox>
-      {children}
-    </Container>
+    <TouchableWithoutFeedback onPress={dismissKeyboard} style={{ flex: 1 }}>
+      <Container>
+        <LogoBox>
+          <Logo>Instagram</Logo>
+        </LogoBox>
+        {children}
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }
