@@ -27,7 +27,7 @@ const CreateAccount = styled.TouchableOpacity`
   padding: 10px 9px;
   border-radius: 5px;
   width: 90%;
-  opacity: ${(props) => (props.disabled ? "0.4" : "1")};
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
 `;
 
 const CreateAccountText = styled.Text`
