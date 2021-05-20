@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Alert, KeyboardAvoidingView, Platform } from "react-native";
+import { KeyboardAvoidingView, Platform } from "react-native";
 import AuthButton from "../Components/Auth/AuthButton";
 import AuthLayOut from "../Components/Auth/AuthLayOut";
 import Subtitle from "../Components/Auth/Subtitle";
@@ -68,6 +68,7 @@ export default function Login() {
           disabled={true}
           onPress={handleSubmit(onSubmit)}
           text="Login"
+          loading={true}
         />
       </KeyboardAvoidingView>
     </AuthLayOut>
