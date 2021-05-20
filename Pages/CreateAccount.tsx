@@ -1,12 +1,13 @@
 import { useTheme } from "../styles/ChangeMode";
 import React, { useEffect, useRef } from "react";
-import { Alert, Platform, KeyboardAvoidingView } from "react-native";
+import { Platform, KeyboardAvoidingView, Text } from "react-native";
 import AuthButton from "../Components/Auth/AuthButton";
 import AuthLayOut from "../Components/Auth/AuthLayOut";
 import SwitchBox from "../Components/SwitchBox";
 import { Input } from "../Components/Auth/TextInputStyles";
 import Subtitle from "../Components/Auth/Subtitle";
 import { SubmitHandler, useForm } from "react-hook-form";
+import ErrorMessage from "../Components/Auth/ErrorMessage";
 
 interface IProps {
   firstName: string;
@@ -17,7 +18,12 @@ interface IProps {
 }
 
 export default function CreateAccount() {
-  const { register, handleSubmit, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
   const theme = useTheme();
   const lastNameRef = useRef(null);
   const usernameRef = useRef(null);
@@ -30,12 +36,27 @@ export default function CreateAccount() {
 
   const onSubmit: SubmitHandler<IProps> = (data) => console.log(data);
 
+  //required => errors 에 대한 접근 가능
   useEffect(() => {
-    register("firstName");
-    register("lastName");
-    register("username");
-    register("email");
-    register("password");
+    register("firstName", {
+      required: true,
+      maxLength: 8,
+    });
+    register("lastName", {
+      required: true,
+      maxLength: 10,
+    });
+    register("username", {
+      required: true,
+      maxLength: 10,
+    });
+    register("email", {
+      required: true,
+    });
+    register("password", {
+      required: true,
+      maxLength: 15,
+    });
   }, [register]);
 
   return (
@@ -80,7 +101,7 @@ export default function CreateAccount() {
 
         <Input
           ref={emailRef}
-          placeholder="Last Name"
+          placeholder="Email"
           returnKeyType="next"
           placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
           onSubmitEditing={() => onNext(passwordRef)}
@@ -102,6 +123,7 @@ export default function CreateAccount() {
           onPress={handleSubmit(onSubmit)}
           disabled={true}
           text="CreateAccount"
+          loading={true}
         />
       </KeyboardAvoidingView>
     </AuthLayOut>
