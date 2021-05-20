@@ -1,5 +1,5 @@
 import React from "react";
-import { Keyboard, TouchableWithoutFeedback } from "react-native";
+import { Keyboard, Text, TouchableWithoutFeedback } from "react-native";
 import styled from "styled-components/native";
 
 const Container = styled.View`
@@ -10,13 +10,14 @@ const Container = styled.View`
 `;
 
 const LogoBox = styled.View`
-  margin-bottom: 50px;
+  margin-bottom: 20px;
+  flex-direction: row;
+  align-items: center;
 `;
 
-const Logo = styled.Text`
-  font-size: 50px;
-  color: ${(props) => props.theme.fontColor};
-  font-weight: bold;
+const Logo = styled.Image`
+  width: 100%;
+  height: 100px;
 `;
 
 interface Props {
@@ -32,7 +33,10 @@ export default function AuthLayOut({ children }: Props) {
     <TouchableWithoutFeedback onPress={dismissKeyboard} style={{ flex: 1 }}>
       <Container>
         <LogoBox>
-          <Logo>Instagram</Logo>
+          <Logo
+            source={require("../../assets/instagram_logo.png")}
+            resizeMode="contain"
+          />
         </LogoBox>
         {children}
       </Container>
