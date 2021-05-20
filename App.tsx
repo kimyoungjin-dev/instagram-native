@@ -5,7 +5,7 @@ import { Image } from "react-native";
 import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import LoggedOutNav from "./Navigator/LoggedOutNav";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import ThemeManager from "./styles/ChangeMode";
 import { AppearanceProvider } from "react-native-appearance";
 
@@ -29,7 +29,7 @@ export default function App() {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/840px-Instagram_logo.svg.png",
       require("./assets/instagram_logo.png"),
     ]);
-    const fonts = getFonts([Ionicons.font]);
+    const fonts = getFonts([Ionicons.font, FontAwesome.font]);
     await Promise.all([...images, ...fonts]);
   };
   const onFinish = () => setLoading(false);
