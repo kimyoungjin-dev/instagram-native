@@ -1,5 +1,5 @@
 import React from "react";
-import { Keyboard, Text, TouchableWithoutFeedback } from "react-native";
+import { Keyboard, Platform, TouchableWithoutFeedback } from "react-native";
 import styled from "styled-components/native";
 import { useTheme } from "../../styles/ChangeMode";
 
@@ -32,7 +32,11 @@ export default function AuthLayOut({ children }: Props) {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={dismissKeyboard} style={{ flex: 1 }}>
+    <TouchableWithoutFeedback
+      onPress={dismissKeyboard}
+      style={{ flex: 1 }}
+      disabled={Platform.OS === "web"}
+    >
       <Container>
         <LogoBox>
           <Logo
