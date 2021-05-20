@@ -1,18 +1,17 @@
-import { createGlobalStyle, DefaultTheme } from "styled-components";
-import { reset } from "styled-reset";
+import { DefaultTheme } from "styled-components";
 
 export const light: DefaultTheme = {
-  bgColor: "#FAFAFA",
-  fontColor: "rgb(38,38,38)",
-  loginBtnColor: "#0095f6",
+  bgColor: "white",
+  fontColor: "black",
+  loginBtnColor: "blue",
   borderColor: "rgb(219,219,219)",
   silverColor: "silver",
 };
 
 export const dark: DefaultTheme = {
-  bgColor: "rgb(38,38,38)",
-  fontColor: "#FAFAFA",
-  loginBtnColor: "#0095f6",
+  bgColor: "black",
+  fontColor: "white",
+  loginBtnColor: "blue",
   borderColor: "rgb(219,219,219)",
   silverColor: "silver",
 };
