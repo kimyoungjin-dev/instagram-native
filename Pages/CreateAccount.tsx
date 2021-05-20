@@ -1,11 +1,11 @@
 import { useTheme } from "../styles/ChangeMode";
 import React, { useRef } from "react";
 import { Alert, Platform, KeyboardAvoidingView } from "react-native";
-import styled from "styled-components/native";
 import AuthButton from "../Components/Auth/AuthButton";
 import AuthLayOut from "../Components/Auth/AuthLayOut";
 import SwitchBox from "../Components/SwitchBox";
 import { Input } from "../Components/Auth/TextInputStyles";
+import Subtitle from "../Components/Auth/Subtitle";
 
 export default function CreateAccount() {
   const theme = useTheme();
@@ -26,6 +26,7 @@ export default function CreateAccount() {
   return (
     <AuthLayOut>
       <SwitchBox />
+      <Subtitle text="CreateAccount" />
       <KeyboardAvoidingView
         style={{
           width: "100%",
@@ -38,7 +39,7 @@ export default function CreateAccount() {
         <Input
           placeholder="First Name"
           returnKeyType="next"
-          placeholderTextColor={theme.mode === "dark" ? "white" : "black"}
+          placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
           onSubmitEditing={() => onNext(lastNameRef)}
         />
 
@@ -46,7 +47,7 @@ export default function CreateAccount() {
           ref={lastNameRef}
           placeholder="Last Name"
           returnKeyType="next"
-          placeholderTextColor={theme.mode === "dark" ? "white" : "black"}
+          placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
           onSubmitEditing={() => onNext(usernameRef)}
         />
 
@@ -54,7 +55,7 @@ export default function CreateAccount() {
           ref={usernameRef}
           placeholder="User Name"
           returnKeyType="next"
-          placeholderTextColor={theme.mode === "dark" ? "white" : "black"}
+          placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
           onSubmitEditing={() => onNext(emailRef)}
         />
 
@@ -63,7 +64,7 @@ export default function CreateAccount() {
           placeholder="Password"
           returnKeyType="done"
           secureTextEntry={true}
-          placeholderTextColor={theme.mode === "dark" ? "white" : "black"}
+          placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
           onSubmitEditing={LastInput}
           lastOne={true}
         />
