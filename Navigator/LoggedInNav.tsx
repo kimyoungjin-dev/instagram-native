@@ -8,6 +8,7 @@ import { useTheme } from "../styles/ChangeMode";
 import { Ionicons } from "@expo/vector-icons";
 import Camera from "../Pages/Camera";
 import Me from "../Pages/Me";
+import SharedNav from "./SharedNav";
 
 const Tabs = createBottomTabNavigator();
 
@@ -27,7 +28,6 @@ export default function LoggedInNav() {
     >
       <Tabs.Screen
         name="Feed"
-        component={Feed}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
@@ -37,17 +37,20 @@ export default function LoggedInNav() {
             />
           ),
         }}
-      />
+      >
+        {() => <SharedNav screenName="Feed" />}
+      </Tabs.Screen>
 
       <Tabs.Screen
         name="Search"
-        component={Search}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name="search" color={color} size={focused ? 27 : 25} />
           ),
         }}
-      />
+      >
+        {() => <SharedNav screenName="Search" />}
+      </Tabs.Screen>
 
       <Tabs.Screen
         name="Camera"
@@ -65,7 +68,6 @@ export default function LoggedInNav() {
 
       <Tabs.Screen
         name="Notification"
-        component={Notification}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
@@ -75,10 +77,12 @@ export default function LoggedInNav() {
             />
           ),
         }}
-      />
+      >
+        {() => <SharedNav screenName="Notification" />}
+      </Tabs.Screen>
+
       <Tabs.Screen
         name="Me"
-        component={Me}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
@@ -88,7 +92,9 @@ export default function LoggedInNav() {
             />
           ),
         }}
-      />
+      >
+        {() => <SharedNav screenName="Me" />}
+      </Tabs.Screen>
     </Tabs.Navigator>
   );
 }
