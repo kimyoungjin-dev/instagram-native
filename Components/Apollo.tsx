@@ -6,9 +6,9 @@ export const tokenVar = makeVar("");
 
 // multiSet을 이용하여 token을 저장한다.
 export const logUserIn = async (token: string) => {
-  await AsyncStorage.multiSet([["token", JSON.stringify(token)]]);
-  isLoggedInVar(true);
+  await AsyncStorage.multiSet([["token", token]]);
   tokenVar(token);
+  isLoggedInVar(true);
 };
 
 const client = new ApolloClient({
