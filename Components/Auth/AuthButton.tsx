@@ -6,7 +6,7 @@ interface Props {
   onPress: (event: GestureResponderEvent) => void;
   disabled: boolean;
   text: string;
-  loading: boolean;
+  loading?: boolean;
 }
 
 const Button = styled.TouchableOpacity`
