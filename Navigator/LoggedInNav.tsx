@@ -6,6 +6,8 @@ import Notification from "../Pages/Notification";
 import Profile from "../Pages/Profile";
 import { useTheme } from "../styles/ChangeMode";
 import { Ionicons } from "@expo/vector-icons";
+import Camera from "../Pages/Camera";
+import Me from "../Pages/Me";
 
 const Tabs = createBottomTabNavigator();
 
@@ -28,34 +30,62 @@ export default function LoggedInNav() {
         component={Feed}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name="home" color={color} size={focused ? 22 : 18} />
+            <Ionicons
+              name={focused ? "home" : "home-outline"}
+              color={color}
+              size={focused ? 27 : 25}
+            />
           ),
         }}
       />
+
       <Tabs.Screen
         name="Search"
         component={Search}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name="search" color={color} size={focused ? 22 : 18} />
+            <Ionicons name="search" color={color} size={focused ? 27 : 25} />
           ),
         }}
       />
+
+      <Tabs.Screen
+        name="Camera"
+        component={Camera}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? "camera" : "camera-outline"}
+              color={color}
+              size={focused ? 27 : 25}
+            />
+          ),
+        }}
+      />
+
       <Tabs.Screen
         name="Notification"
         component={Notification}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name="heart" color={color} size={focused ? 22 : 18} />
+            <Ionicons
+              name={focused ? "heart" : "heart-outline"}
+              color={color}
+              size={focused ? 27 : 25}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="Profile"
-        component={Profile}
+        name="Me"
+        component={Me}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name="person" color={color} size={focused ? 22 : 18} />
+            <Ionicons
+              name={focused ? "person" : "person-outline"}
+              color={color}
+              size={focused ? 27 : 25}
+            />
           ),
         }}
       />
