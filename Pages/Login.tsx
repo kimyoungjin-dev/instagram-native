@@ -29,6 +29,7 @@ export default function Login({ route: { params } }: any) {
       password: params?.password,
     },
   });
+
   const [loginMutation, { loading }] = useMutation<login, loginVariables>(
     LOGINT_MUTATION,
     {

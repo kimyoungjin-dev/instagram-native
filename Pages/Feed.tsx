@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, View } from "react-native";
-import SwitchBox from "../Components/SwitchBox";
 
 export default function Feed() {
   return (
