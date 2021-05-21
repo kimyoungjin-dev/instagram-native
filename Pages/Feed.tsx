@@ -1,9 +1,13 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
-import { Text } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { FEED_QUERY } from "../Components/Fragment";
 import ViewContainer from "../Components/ViewContainer";
-import { seeFeed, seeFeedVariables } from "../__generated__/seeFeed";
+import {
+  seeFeed,
+  seeFeedVariables,
+  seeFeed_seeFeed,
+} from "../__generated__/seeFeed";
 
 //성공적인 로그인 => authLink.concat으로 백앤드로 토큰이 보내졌다는 의미이다.
 export default function Feed({ navigation }: any) {
@@ -12,10 +16,20 @@ export default function Feed({ navigation }: any) {
       page: 1,
     },
   });
+
   //flatlist는 현재 화면에 보이는것만 랜더링을 한다.
   return (
     <ViewContainer loading={loading}>
-      <Text style={{ color: "white" }}>white</Text>
+      <FlatList
+        data={data?.seeFeed}
+        keyExtractor={(photo) => "" + photo?.id}
+        renderItem={({ item: photo }) => (
+          <View>
+            <Text>{photo?.caption}</Text>
+          </View>
+        )}
+      />
     </ViewContainer>
   );
 }
+// (property) ListRenderItemInfo<seeFeed_seeFeed | null>.item: seeFeed_seeFeed | null
