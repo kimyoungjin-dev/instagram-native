@@ -1,46 +1,21 @@
 import { useQuery } from "@apollo/client";
-import gql from "graphql-tag";
 import React from "react";
-import { Text, View } from "react-native";
-import { COMMENT_FRAGMENT, PHOTO_FRAGMENT } from "../Components/Fragment";
+import { Text } from "react-native";
+import { FEED_QUERY } from "../Components/Fragment";
+import ViewContainer from "../Components/ViewContainer";
+import { seeFeed, seeFeedVariables } from "../__generated__/seeFeed";
 
-const FEED_QUERY = gql`
-  query seeFeed($page: Int!) {
-    seeFeed(page: $page) {
-      ...PhotoFragment
-      id
-      user {
-        username
-        avatar
-      }
-      file
-      caption
-      likes
-      commentNumber
-      comments {
-        ...CommentFragment
-      }
-      createdAt
-      isMine
-      isLiked
-    }
-  }
-  ${COMMENT_FRAGMENT}
-  ${PHOTO_FRAGMENT}
-`;
-
+//성공적인 로그인 => authLink.concat으로 백앤드로 토큰이 보내졌다는 의미이다.
 export default function Feed({ navigation }: any) {
-  const { data } = useQuery(FEED_QUERY);
+  const { data, loading } = useQuery<seeFeed, seeFeedVariables>(FEED_QUERY, {
+    variables: {
+      page: 1,
+    },
+  });
+  //flatlist는 현재 화면에 보이는것만 랜더링을 한다.
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "black",
-      }}
-    >
-      <Text style={{ color: "white" }}>Photo</Text>
-    </View>
+    <ViewContainer loading={loading}>
+      <Text style={{ color: "white" }}>white</Text>
+    </ViewContainer>
   );
 }
