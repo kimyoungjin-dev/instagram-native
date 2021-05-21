@@ -5,7 +5,6 @@ import AuthButton from "../Components/Auth/AuthButton";
 import AuthLayOut from "../Components/Auth/AuthLayOut";
 import SwitchBox from "../Components/SwitchBox";
 import { useTheme } from "../styles/ChangeMode";
-import { AuthProps } from "../utils/AuthParamList";
 
 //프로필 사진 , 유저네임 추가
 
@@ -21,7 +20,7 @@ const CreateAcount = styled.View`
   justify-content: center;
 `;
 
-export default function Welcome({ navigation }: AuthProps<"Welcome">) {
+export default function Welcome({ navigation }: any) {
   const theme = useTheme();
   const goToLogin = () => navigation.navigate("Login");
   const goToCreateAccount = () => navigation.navigate("CreateAccount");

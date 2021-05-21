@@ -7,14 +7,12 @@ import SwitchBox from "../Components/SwitchBox";
 import { Input } from "../Components/Auth/TextInputStyles";
 import Subtitle from "../Components/Auth/Subtitle";
 import { SubmitHandler, useForm } from "react-hook-form";
-import ErrorMessage from "../Components/Auth/ErrorMessage";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import {
   createAccount,
   createAccountVariables,
 } from "../__generated__/createAccount";
-import { AuthProps } from "../utils/AuthParamList";
 
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccount(

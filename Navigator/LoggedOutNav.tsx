@@ -3,10 +3,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Welcome from "../Pages/Welcome";
 import Login from "../Pages/Login";
 import CreateAccount from "../Pages/CreateAccount";
-import { AuthParamList } from "../utils/AuthParamList";
 import { useTheme } from "../styles/ChangeMode";
 
-const Stack = createStackNavigator<AuthParamList>();
+const Stack = createStackNavigator();
 
 export default function LoggedOutNav() {
   const theme = useTheme();
