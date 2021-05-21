@@ -11,10 +11,17 @@ export const isLoggedInVar = makeVar(false);
 export const tokenVar = makeVar("");
 
 // multiSet을 이용하여 token을 저장한다.
+
 export const logUserIn = async (token: string) => {
-  await AsyncStorage.multiSet([["token", token]]);
+  await AsyncStorage.setItem("token", token);
   tokenVar(token);
   isLoggedInVar(true);
+};
+//create logOut fuction :isLoggedInUser(false)
+export const logUserOut = async () => {
+  await AsyncStorage.removeItem("token");
+  tokenVar("");
+  isLoggedInVar(false);
 };
 
 const httpLink = createHttpLink({
