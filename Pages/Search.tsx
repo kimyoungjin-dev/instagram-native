@@ -1,8 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
-import SwitchBox from "../Components/SwitchBox";
 
-export default function Feed() {
+export default function Search() {
   return (
     <View
       style={{
@@ -12,7 +11,7 @@ export default function Feed() {
         backgroundColor: "black",
       }}
     >
-      <Text style={{ color: "white" }}>Feed</Text>
+      <Text style={{ color: "white" }}>Search</Text>
     </View>
   );
 }
