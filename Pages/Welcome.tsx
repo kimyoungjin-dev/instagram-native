@@ -42,7 +42,7 @@ export default function Welcome({ navigation }: AuthProps<"Welcome">) {
         <TouchableOpacity onPress={goToCreateAccount}>
           <Text
             style={{
-              color: theme.mode === "dark" ? "white" : "black",
+              color: "red",
               marginLeft: 5,
               fontSize: 16,
             }}
