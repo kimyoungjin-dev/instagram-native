@@ -45,6 +45,7 @@ export default function App() {
       tokenVar(token);
       isLoggedInVar(true);
     }
+
     return preloadAssets();
   };
 
