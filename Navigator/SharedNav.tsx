@@ -6,6 +6,8 @@ import Feed from "../Pages/Feed";
 import Search from "../Pages/Search";
 import Notification from "../Pages/Notification";
 import Me from "../Pages/Me";
+import { Image } from "react-native";
+import { useTheme } from "../styles/ChangeMode";
 
 interface IProps {
   screenName: string;
@@ -15,10 +17,35 @@ const Stack = createStackNavigator();
 //Stack Navigator의 맨앞의 화면은 props에 따라 달라지고, Profile,Photo 컴포넌트는 공유된다.
 
 export default function SharedNav({ screenName }: IProps) {
+  const theme = useTheme();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: "white",
+        headerStyle: {
+          backgroundColor: "black",
+          borderBottomColor: "black",
+          shadowColor: "black",
+        },
+      }}
+    >
       {screenName === "Feed" ? (
-        <Stack.Screen name="Feed" component={Feed} />
+        <Stack.Screen
+          name="Feed"
+          component={Feed}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  height: 60,
+                  tintColor: theme.mode === "dark" ? "black" : "white",
+                }}
+                source={require("../assets/instagram_logo.png")}
+                resizeMode="contain"
+              />
+            ),
+          }}
+        />
       ) : null}
 
       {screenName === "Search" ? (
