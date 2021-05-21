@@ -23,3 +23,29 @@ export const COMMENT_FRAGMENT = gql`
     createdAt
   }
 `;
+
+//seeFeed
+export const FEED_QUERY = gql`
+  query seeFeed($page: Int!) {
+    seeFeed(page: $page) {
+      ...PhotoFragment
+      id
+      user {
+        username
+        avatar
+      }
+      file
+      caption
+      likes
+      commentNumber
+      comments {
+        ...CommentFragment
+      }
+      createdAt
+      isMine
+      isLiked
+    }
+  }
+  ${COMMENT_FRAGMENT}
+  ${PHOTO_FRAGMENT}
+`;
