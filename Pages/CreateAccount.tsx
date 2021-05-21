@@ -67,7 +67,8 @@ export default function CreateAccount({ navigation }: any) {
     }
   };
 
-  const { register, handleSubmit, setValue, watch, getValues } = useForm();
+  const { register, handleSubmit, setValue, getValues, watch } =
+    useForm<createAccountVariables>();
   const theme = useTheme();
   const lastNameRef = useRef(null);
   const usernameRef = useRef(null);
@@ -79,11 +80,21 @@ export default function CreateAccount({ navigation }: any) {
   };
 
   useEffect(() => {
-    register("firstName");
-    register("lastName");
-    register("username");
-    register("email");
-    register("password");
+    register("firstName", {
+      required: true,
+    });
+    register("lastName", {
+      required: true,
+    });
+    register("username", {
+      required: true,
+    });
+    register("email", {
+      required: true,
+    });
+    register("password", {
+      required: true,
+    });
   }, [register]);
 
   return (
@@ -151,7 +162,13 @@ export default function CreateAccount({ navigation }: any) {
 
         <AuthButton
           onPress={handleSubmit(onSubmit)}
-          disabled={false}
+          disabled={
+            !watch("username") ||
+            !watch("email") ||
+            !watch("firstName") ||
+            !watch("lastName") ||
+            !watch("password")
+          }
           text="CreateAccount"
           loading={loading}
         />
