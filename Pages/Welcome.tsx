@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import AuthButton from "../Components/Auth/AuthButton";
 import AuthLayOut from "../Components/Auth/AuthLayOut";
 import SwitchBox from "../Components/SwitchBox";
+import { useTheme } from "../styles/ChangeMode";
 import { AuthProps } from "../utils/AuthParamList";
 
 //프로필 사진 , 유저네임 추가
@@ -21,6 +22,7 @@ const CreateAcount = styled.View`
 `;
 
 export default function Welcome({ navigation }: AuthProps<"Welcome">) {
+  const theme = useTheme();
   const goToLogin = () => navigation.navigate("Login");
   const goToCreateAccount = () => navigation.navigate("CreateAccount");
 
@@ -34,9 +36,17 @@ export default function Welcome({ navigation }: AuthProps<"Welcome">) {
       </TouchableOpacity>
 
       <CreateAcount>
-        <Text style={{ color: "silver" }}>instagram에 처음 오셨나요?</Text>
+        <Text style={{ color: theme.mode === "dark" ? "white" : "black" }}>
+          instagram에 처음 오셨나요?
+        </Text>
         <TouchableOpacity onPress={goToCreateAccount}>
-          <Text style={{ color: "silver", marginLeft: 5, fontSize: 16 }}>
+          <Text
+            style={{
+              color: theme.mode === "dark" ? "white" : "black",
+              marginLeft: 5,
+              fontSize: 16,
+            }}
+          >
             가입하기
           </Text>
         </TouchableOpacity>

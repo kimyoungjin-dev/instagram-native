@@ -4,15 +4,17 @@ import Welcome from "../Pages/Welcome";
 import Login from "../Pages/Login";
 import CreateAccount from "../Pages/CreateAccount";
 import { AuthParamList } from "../utils/AuthParamList";
+import { useTheme } from "../styles/ChangeMode";
 
 const Stack = createStackNavigator<AuthParamList>();
 
 export default function LoggedOutNav() {
+  const theme = useTheme();
   return (
     <Stack.Navigator
       screenOptions={{
         headerBackTitleVisible: false,
-        headerTintColor: "white",
+        headerTintColor: theme.mode === "dark" ? "white" : "black",
         headerTransparent: true,
         headerTitle: "",
       }}
