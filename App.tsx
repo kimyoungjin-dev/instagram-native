@@ -8,8 +8,9 @@ import LoggedOutNav from "./Navigator/LoggedOutNav";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import ThemeManager from "./styles/ChangeMode";
 import { AppearanceProvider } from "react-native-appearance";
-import { ApolloProvider } from "@apollo/client";
-import client from "./Components/Apollo";
+import { ApolloProvider, useReactiveVar } from "@apollo/client";
+import client, { isLoggedInVar } from "./Components/Apollo";
+import LoggedInNav from "./Navigator/LoggedInNav";
 
 const getImages = (images: any) =>
   images.map((image: any) => {
@@ -44,12 +45,14 @@ export default function App() {
     />;
   }
 
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
+
   return (
     <ApolloProvider client={client}>
       <AppearanceProvider>
         <ThemeManager>
           <NavigationContainer>
-            <LoggedOutNav />
+            {isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
           </NavigationContainer>
         </ThemeManager>
       </AppearanceProvider>
