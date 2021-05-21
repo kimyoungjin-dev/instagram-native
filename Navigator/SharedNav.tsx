@@ -20,6 +20,7 @@ export default function SharedNav({ screenName }: IProps) {
   const theme = useTheme();
   return (
     <Stack.Navigator
+      headerMode="float"
       screenOptions={{
         headerTintColor: "white",
         headerStyle: {
