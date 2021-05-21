@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 import React, { useEffect, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { KeyboardAvoidingView, Platform } from "react-native";
-import { isLoggedInVar } from "../Components/Apollo";
+import { isLoggedInVar, logUserIn } from "../Components/Apollo";
 import AuthButton from "../Components/Auth/AuthButton";
 import AuthLayOut from "../Components/Auth/AuthLayOut";
 import Subtitle from "../Components/Auth/Subtitle";
@@ -23,7 +23,7 @@ const LOGINT_MUTATION = gql`
 `;
 
 export default function Login({ route: { params } }: any) {
-  const { register, handleSubmit, setValue, watch } = useForm({
+  const { register, handleSubmit, setValue, watch } = useForm<loginVariables>({
     defaultValues: {
       username: params?.username,
       password: params?.password,
@@ -32,12 +32,14 @@ export default function Login({ route: { params } }: any) {
   const [loginMutation, { loading }] = useMutation<login, loginVariables>(
     LOGINT_MUTATION,
     {
-      onCompleted: (data) => {
+      onCompleted: async (data) => {
         const {
-          login: { ok },
+          login: { ok, token },
         } = data;
 
-        if (ok) return isLoggedInVar(true);
+        if (ok) {
+          await logUserIn(token!);
+        }
       },
     }
   );
@@ -64,8 +66,6 @@ export default function Login({ route: { params } }: any) {
     register("password");
   }, [register]);
 
-  //AuthButton  disabled props는 watch에 의해 username password둘다 빈배열이 아니어야 활성화된다.
-
   watch;
   return (
     <AuthLayOut>
@@ -81,7 +81,7 @@ export default function Login({ route: { params } }: any) {
         keyboardVerticalOffset={Platform.OS === "ios" ? 40 : 0}
       >
         <Input
-          value={watch("username")}
+          value={watch("username") || ""}
           placeholder="User Name"
           returnKeyType="next"
           autoCapitalize="none"
@@ -93,10 +93,11 @@ export default function Login({ route: { params } }: any) {
         />
 
         <Input
-          value={watch("password")}
+          value={watch("password") || ""}
           ref={passwordRef}
           placeholder="password"
           returnKeyType="done"
+          secureTextEntry={true}
           placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
           onSubmitEditing={handleSubmit(onSubmit)}
           onChangeText={(text) => {
