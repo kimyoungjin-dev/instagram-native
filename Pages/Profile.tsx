@@ -11,7 +11,7 @@ export default function Profile() {
         backgroundColor: "black",
       }}
     >
-      <Text style={{ color: "white" }}>Profile</Text>
+      <Text style={{ color: "white" }}>SomeOne Profile</Text>
     </View>
   );
 }
