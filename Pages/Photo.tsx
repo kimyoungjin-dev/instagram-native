@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
-export default function Photo() {
+export default function Photo({ navigation }: any) {
   return (
     <View
       style={{
@@ -11,7 +11,9 @@ export default function Photo() {
         backgroundColor: "black",
       }}
     >
-      <Text style={{ color: "white" }}>Photo</Text>
+      <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+        <Text style={{ color: "white" }}>Go to Profile</Text>
+      </TouchableOpacity>
     </View>
   );
 }
