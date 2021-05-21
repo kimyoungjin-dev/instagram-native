@@ -8,22 +8,66 @@ import { Input } from "../Components/Auth/TextInputStyles";
 import Subtitle from "../Components/Auth/Subtitle";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ErrorMessage from "../Components/Auth/ErrorMessage";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/client";
+import {
+  createAccount,
+  createAccountVariables,
+} from "../__generated__/createAccount";
+import { AuthProps } from "../utils/AuthParamList";
 
-interface IProps {
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  password: string;
-}
+const CREATE_ACCOUNT_MUTATION = gql`
+  mutation createAccount(
+    $firstName: String!
+    $lastName: String
+    $username: String!
+    $email: String!
+    $password: String!
+  ) {
+    createAccount(
+      firstName: $firstName
+      lastName: $lastName
+      username: $username
+      email: $email
+      password: $password
+    ) {
+      ok
+      error
+    }
+  }
+`;
 
-export default function CreateAccount() {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm();
+export default function CreateAccount({ navigation }: any) {
+  const [createAccountMutation, { loading }] = useMutation<
+    createAccount,
+    createAccountVariables
+  >(CREATE_ACCOUNT_MUTATION, {
+    onCompleted: (data) => {
+      const { username, password } = getValues();
+      const {
+        createAccount: { ok },
+      } = data;
+      //createAccount에 성공적이라면 'Login' 페이지로 이동, props : username, password 전달
+      if (ok) {
+        navigation.navigate("Login", {
+          username,
+          password,
+        });
+      }
+    },
+  });
+
+  const onSubmit: SubmitHandler<createAccountVariables> = (data) => {
+    if (!loading) {
+      createAccountMutation({
+        variables: {
+          ...data,
+        },
+      });
+    }
+  };
+
+  const { register, handleSubmit, setValue, watch, getValues } = useForm();
   const theme = useTheme();
   const lastNameRef = useRef(null);
   const usernameRef = useRef(null);
@@ -34,29 +78,12 @@ export default function CreateAccount() {
     nextOne?.current?.focus();
   };
 
-  const onSubmit: SubmitHandler<IProps> = (data) => console.log(data);
-
-  //required => errors 에 대한 접근 가능
   useEffect(() => {
-    register("firstName", {
-      required: true,
-      maxLength: 8,
-    });
-    register("lastName", {
-      required: true,
-      maxLength: 10,
-    });
-    register("username", {
-      required: true,
-      maxLength: 10,
-    });
-    register("email", {
-      required: true,
-    });
-    register("password", {
-      required: true,
-      maxLength: 15,
-    });
+    register("firstName");
+    register("lastName");
+    register("username");
+    register("email");
+    register("password");
   }, [register]);
 
   return (
@@ -73,6 +100,7 @@ export default function CreateAccount() {
         keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 0}
       >
         <Input
+          autoCapitalize="none"
           placeholder="First Name"
           returnKeyType="next"
           placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
@@ -82,6 +110,7 @@ export default function CreateAccount() {
 
         <Input
           ref={lastNameRef}
+          autoCapitalize="none"
           placeholder="Last Name"
           returnKeyType="next"
           placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
@@ -101,6 +130,7 @@ export default function CreateAccount() {
 
         <Input
           ref={emailRef}
+          autoCapitalize="none"
           placeholder="Email"
           returnKeyType="next"
           placeholderTextColor={theme.mode === "dark" ? "black" : "white"}
@@ -121,9 +151,9 @@ export default function CreateAccount() {
 
         <AuthButton
           onPress={handleSubmit(onSubmit)}
-          disabled={true}
+          disabled={false}
           text="CreateAccount"
-          loading={true}
+          loading={loading}
         />
       </KeyboardAvoidingView>
     </AuthLayOut>
