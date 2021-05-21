@@ -9,8 +9,9 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import ThemeManager from "./styles/ChangeMode";
 import { AppearanceProvider } from "react-native-appearance";
 import { ApolloProvider, useReactiveVar } from "@apollo/client";
-import client, { isLoggedInVar } from "./Components/Apollo";
+import client, { isLoggedInVar, tokenVar } from "./Components/Apollo";
 import LoggedInNav from "./Navigator/LoggedInNav";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const getImages = (images: any) =>
   images.map((image: any) => {
@@ -26,20 +27,30 @@ const getFonts = (fonts: any) =>
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const onFinish = () => setLoading(false);
 
-  const loadAssets = async () => {
+  const preloadAssets = async () => {
     const images = getImages([
       "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/840px-Instagram_logo.svg.png",
       require("./assets/instagram_logo.png"),
     ]);
     const fonts = getFonts([Ionicons.font, FontAwesome.font]);
-    await Promise.all([...images, ...fonts]);
+    return await Promise.all([...images, ...fonts]);
   };
-  const onFinish = () => setLoading(false);
+
+  //AsyncStorage 으로 부터 token을 받아온다.
+  const preload: any = async () => {
+    const token = await AsyncStorage.getItem("token");
+    if (token) {
+      isLoggedInVar(true);
+      tokenVar(token);
+    }
+    return preloadAssets();
+  };
 
   if (loading) {
     <AppLoading
-      startAsync={loadAssets}
+      startAsync={preload()}
       onError={console.warn}
       onFinish={onFinish}
     />;
