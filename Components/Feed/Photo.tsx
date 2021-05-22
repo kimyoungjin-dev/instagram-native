@@ -36,18 +36,27 @@ const Icons = styled.View`
 
 const File = styled.Image``;
 
+const ExtraContainer = styled.View`
+  padding: 10px;
+`;
+
 const Actions = styled.TouchableOpacity``;
 
 const Action = styled.TouchableOpacity``;
 
-const Caption = styled.View``;
+const Caption = styled.View`
+  flex-direction: row;
+`;
 
 const CaptionText = styled.Text`
   color: white;
+  margin-left: 8px;
 `;
 
 const Likes = styled.Text`
   color: white;
+  margin: 5px 0px;
+  font-weight: bold;
 `;
 
 type PhotoPick = Pick<
@@ -116,19 +125,21 @@ export default function Photo({
         style={{ width, height: imageHeight }}
       />
 
-      <Actions>
-        <Action />
-        <Action />
-      </Actions>
+      <ExtraContainer>
+        <Actions>
+          <Action />
+          <Action />
+        </Actions>
 
-      <Likes>{likes === 1 ? "1 Likes" : `${likes} Likes`}</Likes>
+        <Likes>{likes === 1 ? "1 Likes" : `${likes} Likes`}</Likes>
 
-      <Caption>
-        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-          <UserName>{user.username}</UserName>
-        </TouchableOpacity>
-        <CaptionText>{caption}</CaptionText>
-      </Caption>
+        <Caption>
+          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+            <UserName>{user.username}</UserName>
+          </TouchableOpacity>
+          <CaptionText>{caption}</CaptionText>
+        </Caption>
+      </ExtraContainer>
     </Container>
   );
 }
