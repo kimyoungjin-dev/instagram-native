@@ -1,16 +1,37 @@
-import React from "react";
-import { useWindowDimensions } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { Image, TouchableOpacity, useWindowDimensions } from "react-native";
 import styled from "styled-components/native";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
 
 const Container = styled.View``;
 
-const Header = styled.View``;
+const Header = styled.View`
+  padding: 20px 10px;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
-const UserAvatar = styled.Image``;
+const User = styled.TouchableOpacity`
+  align-items: center;
+`;
+
+const UserAvatar = styled.Image`
+  margin-bottom: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+`;
 
 const UserName = styled.Text`
   color: white;
+  font-weight: bold;
+`;
+
+const Icons = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
 
 const File = styled.Image``;
@@ -44,17 +65,55 @@ export default function Photo({
   commentNumber,
 }: PhotoPick) {
   const { width, height } = useWindowDimensions();
+  const [imageHeight, setImageHeight] = useState(height - 450);
+  const navigation = useNavigation();
+  //이미지 파일의 출력 크기를 조정하는 방법
+  useEffect(() => {
+    Image.getSize(file, (_, height) => {
+      setImageHeight(height / 3);
+    });
+  }, [file]);
+
   return (
-    <Container>
+    <Container style={{ borderBottomWidth: 0.3, borderBottomColor: "white" }}>
       <Header>
-        <UserAvatar source={{ uri: user.avatar || undefined }} />
-        <UserName>{user.username}</UserName>
+        <User onPress={() => navigation.navigate("Profile")}>
+          <UserAvatar
+            resizeMode="cover"
+            source={{ uri: user.avatar || undefined }}
+          />
+          <UserName>{user.username}</UserName>
+        </User>
+
+        <Icons>
+          <TouchableOpacity>
+            <FontAwesome name="plus-square-o" size={33} color="white" />
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <FontAwesome
+              name="heart-o"
+              size={27}
+              color="white"
+              style={{ marginLeft: 15 }}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <FontAwesome
+              name="envelope-o"
+              size={33}
+              color="white"
+              style={{ marginLeft: 15 }}
+            />
+          </TouchableOpacity>
+        </Icons>
       </Header>
 
       <File
         source={{ uri: file }}
         resizeMode="cover"
-        style={{ width, height: height - 500 }}
+        style={{ width, height: imageHeight }}
       />
 
       <Actions>
@@ -65,7 +124,9 @@ export default function Photo({
       <Likes>{likes === 1 ? "1 Likes" : `${likes} Likes`}</Likes>
 
       <Caption>
-        <UserName>{user.username}</UserName>
+        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+          <UserName>{user.username}</UserName>
+        </TouchableOpacity>
         <CaptionText>{caption}</CaptionText>
       </Caption>
     </Container>
