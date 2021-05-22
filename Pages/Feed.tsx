@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
-import { FlatList, ListRenderItem, Text, View } from "react-native";
+import { FlatList } from "react-native";
 import Photo from "../Components/Feed/Photo";
 import { FEED_QUERY } from "../Components/Fragment";
 import ViewContainer from "../Components/ViewContainer";
