@@ -26,8 +26,8 @@ export const COMMENT_FRAGMENT = gql`
 
 //seeFeed
 export const FEED_QUERY = gql`
-  query seeFeed($page: Int!) {
-    seeFeed(page: $page) {
+  query seeFeed($offset: Int!) {
+    seeFeed(offset: $offset) {
       ...PhotoFragment
       id
       user {
