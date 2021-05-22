@@ -6,6 +6,7 @@ import {
 } from "@apollo/client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setContext } from "@apollo/client/link/context";
+import { offsetLimitPagination } from "@apollo/client/utilities";
 
 export const isLoggedInVar = makeVar(false);
 export const tokenVar = makeVar("");
@@ -14,14 +15,14 @@ export const tokenVar = makeVar("");
 
 export const logUserIn = async (token: string) => {
   await AsyncStorage.setItem("token", token);
-  tokenVar(token);
   isLoggedInVar(true);
+  tokenVar(token);
 };
 //create logOut fuction :isLoggedInUser(false)
 export const logUserOut = async () => {
   await AsyncStorage.removeItem("token");
-  tokenVar("");
   isLoggedInVar(false);
+  tokenVar("");
 };
 
 const httpLink = createHttpLink({
@@ -37,10 +38,25 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-
-//authLink와 httpLink를 연결 해준다.
+//fetchMore을 사용하기위한 조건은 새롭게 추가된 데이터를 cache에 반영하도록 해준다.
+//typePolicies apollo 에게 type을 설정 할 수 있도록 한다.
+//apollo는 쿼리를 독립된 폴더에 저장을 하는데, 기존page , 변경된 page는 독립되어 저장되지 않도록 해준다.
+//keyArgs : seeFeed의 변수를 하나의 폴더에 저장하는 셈이다.
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          seeFeed: {
+            keyArgs: false,
+            merge(existing = [], incoming = []) {
+              return [...existing, ...incoming];
+            },
+          },
+        },
+      },
+    },
+  }),
 });
 export default client;
