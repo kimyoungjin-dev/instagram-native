@@ -47,5 +47,5 @@ export interface seeFeed {
 }
 
 export interface seeFeedVariables {
-  page: number;
+  offset: number;
 }
