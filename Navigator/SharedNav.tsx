@@ -8,6 +8,8 @@ import Notification from "../Pages/Notification";
 import Me from "../Pages/Me";
 import { Image } from "react-native";
 import { useTheme } from "../styles/ChangeMode";
+import Likes from "../Pages/Likes";
+import Comments from "../Pages/Comments";
 
 interface IProps {
   screenName: string;
@@ -61,6 +63,8 @@ export default function SharedNav({ screenName }: IProps) {
 
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Photo" component={Photo} />
+      <Stack.Screen name="Likes" component={Likes} />
+      <Stack.Screen name="Comments" component={Comments} />
     </Stack.Navigator>
   );
 }
