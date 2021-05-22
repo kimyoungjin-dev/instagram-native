@@ -40,6 +40,7 @@ export const FEED_QUERY = gql`
       ...PhotoFragment
       id
       user {
+        id
         username
         avatar
       }

@@ -9,6 +9,7 @@
 
 export interface seeFeed_seeFeed_user {
   __typename: "User";
+  id: number;
   username: string;
   avatar: string | null;
 }
