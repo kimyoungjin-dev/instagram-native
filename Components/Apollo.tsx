@@ -38,17 +38,19 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
+//cache만을 따로 export 하다.
+export const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        seeFeed: offsetLimitPagination(),
+      },
+    },
+  },
+});
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache({
-    typePolicies: {
-      Query: {
-        fields: {
-          seeFeed: offsetLimitPagination(),
-        },
-      },
-    },
-  }),
+  cache,
 });
 export default client;
