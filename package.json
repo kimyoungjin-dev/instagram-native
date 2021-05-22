@@ -18,6 +18,7 @@
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
     "@types/styled-components": "^5.1.9",
+    "apollo3-cache-persist": "^0.9.1",
     "expo": "~41.0.1",
     "expo-app-loading": "^1.0.3",
     "expo-asset": "~8.3.1",
