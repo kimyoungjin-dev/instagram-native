@@ -40,7 +40,7 @@ export default function Feed() {
             onRefresh={refresh}
           />
         }
-        onEndReachedThreshold={0}
+        onEndReachedThreshold={1}
         onEndReached={() =>
           fetchMore({
             variables: {
