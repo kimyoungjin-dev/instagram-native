@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
-import { Alert, FlatList, RefreshControl } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 import Photo from "../Components/Feed/Photo";
 import { FEED_QUERY } from "../Components/Fragment";
 import ViewContainer from "../Components/ViewContainer";
@@ -30,6 +30,7 @@ export default function Feed() {
     await refetch();
     setRefreshing(false);
   };
+
   return (
     <ViewContainer loading={loading}>
       <FlatList

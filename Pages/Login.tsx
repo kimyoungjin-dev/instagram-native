@@ -37,7 +37,6 @@ export default function Login({ route: { params } }: any) {
         const {
           login: { ok, token },
         } = data;
-
         if (ok) {
           await logUserIn(token!);
         }
@@ -46,7 +45,9 @@ export default function Login({ route: { params } }: any) {
   );
 
   const onSubmit: SubmitHandler<loginVariables> = (data) => {
-    if (!loading) {
+    if (loading) {
+      return;
+    } else {
       loginMutation({
         variables: {
           ...data,
