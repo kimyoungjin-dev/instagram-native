@@ -39,6 +39,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 //cache만을 따로 export 하다.
+//마지막에 app.tsx에 preload 에 넣어준다.
 export const cache = new InMemoryCache({
   typePolicies: {
     Query: {

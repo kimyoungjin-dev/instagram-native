@@ -48,10 +48,6 @@ export default function App() {
     }
     //persistCache 를 통해서 어느저장소로 데이터를 보낼지 정한다.
     //persistCache를 사용하면 사용자가 전에 사용한 화면의 사본을 남아있게 해준다.
-    await persistCache({
-      cache,
-      storage: new AsyncStorageWrapper(AsyncStorage),
-    });
     return preloadAssets();
   };
 
