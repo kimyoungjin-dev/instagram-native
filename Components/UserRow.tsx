@@ -6,6 +6,7 @@ const Container = styled.View`
   flex-direction: row;
   align-items: center;
   padding: 14px;
+  justify-content: space-between;
 `;
 
 const Column = styled.View`
@@ -31,12 +32,12 @@ const FollowBtn = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   padding: 6px 12px;
-  background-color: ${(props) => props.theme.bgColor};
+  background-color: blue;
   border-radius: 7px;
 `;
 
 const FollowText = styled.Text`
-  color: ${(props) => props.theme.fontColor};
+  color: ${(props) => props.theme.bgColor};
   font-weight: bold;
   font-size: 18px;
 `;
@@ -58,9 +59,11 @@ export default function UserRow({
         <Avatar source={{ uri: avatar || undefined }} />
         <UserName>{username}</UserName>
       </Column>
-      <FollowBtn>
-        <FollowText>{isFollowing ? "UnFollow" : "Follow"}</FollowText>
-      </FollowBtn>
+      {!isMe ? (
+        <FollowBtn>
+          <FollowText>{isFollowing ? "UnFollow" : "Follow"}</FollowText>
+        </FollowBtn>
+      ) : null}
     </Container>
   );
 }
