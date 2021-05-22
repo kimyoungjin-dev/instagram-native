@@ -121,7 +121,7 @@ export default function Photo({
 
   useEffect(() => {
     Image.getSize(file, (_, height) => {
-      setImageHeight(height / 3);
+      setImageHeight(height / 2);
     });
   }, [file]);
 
