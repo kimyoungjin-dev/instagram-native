@@ -34,6 +34,11 @@ export default function Likes({ route }: any) {
   return (
     <ViewContainer loading={loading}>
       <FlatList
+        ItemSeparatorComponent={() => (
+          <View
+            style={{ backgroundColor: "white", height: 1, width: "100%" }}
+          ></View>
+        )}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
