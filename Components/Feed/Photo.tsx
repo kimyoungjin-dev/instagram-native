@@ -1,9 +1,15 @@
+import { useMutation } from "@apollo/client";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { Image, TouchableOpacity, useWindowDimensions } from "react-native";
 import styled from "styled-components/native";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
+import {
+  toggleLike,
+  toggleLikeVariables,
+} from "../../__generated__/toggleLike";
+import { TOGGLE_LIKE_MUTATION } from "../Fragment";
 
 const Container = styled.View``;
 
@@ -77,10 +83,42 @@ export default function Photo({
   likes,
   commentNumber,
 }: PhotoPick) {
+  const [toggleLikeMutation] = useMutation<toggleLike, toggleLikeVariables>(
+    TOGGLE_LIKE_MUTATION,
+    {
+      variables: {
+        id,
+      },
+      update: (cache, result) => {
+        if (result.data?.toggleLike.ok) {
+          const {
+            data: {
+              toggleLike: { ok },
+            },
+          } = result;
+          if (ok) {
+            const photoId = `Photo:${id}`;
+            cache.modify({
+              id: photoId,
+              fields: {
+                isLiked(prev) {
+                  return !prev;
+                },
+                likes(prev) {
+                  return isLiked ? prev - 1 : prev + 1;
+                },
+              },
+            });
+          }
+        }
+      },
+    }
+  );
+
   const { width, height } = useWindowDimensions();
   const [imageHeight, setImageHeight] = useState(height - 450);
   const navigation = useNavigation();
-  //이미지 파일의 출력 크기를 조정하는 방법
+
   useEffect(() => {
     Image.getSize(file, (_, height) => {
       setImageHeight(height / 3);
@@ -100,13 +138,13 @@ export default function Photo({
 
         <Icons>
           <TouchableOpacity>
-            <FontAwesome name="plus-square-o" size={33} color="white" />
+            <FontAwesome name="plus-square-o" size={30} color="white" />
           </TouchableOpacity>
 
           <TouchableOpacity>
             <FontAwesome
               name="heart-o"
-              size={27}
+              size={24}
               color="white"
               style={{ marginLeft: 15 }}
             />
@@ -115,7 +153,7 @@ export default function Photo({
           <TouchableOpacity>
             <FontAwesome
               name="envelope-o"
-              size={33}
+              size={28}
               color="white"
               style={{ marginLeft: 15 }}
             />
@@ -131,11 +169,11 @@ export default function Photo({
 
       <ExtraContainer>
         <HeartMessageBox>
-          <HeartMessage>
+          <HeartMessage onPress={() => toggleLikeMutation()}>
             <Ionicons
               name={likes > 0 ? "ios-heart-circle" : "ios-heart-circle-outline"}
               size={28}
-              color={likes === 0 ? "white" : "skyblue"}
+              color={likes === 0 ? "white" : "tomato"}
             />
           </HeartMessage>
           <HeartMessage onPress={() => navigation.navigate("Comments")}>
