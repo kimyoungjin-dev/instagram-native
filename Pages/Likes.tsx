@@ -1,32 +1,39 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
-import { Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { LIKES_QUERY } from "../Components/Fragment";
+import ViewContainer from "../Components/ViewContainer";
 import {
   seePhotoLikes,
   seePhotoLikesVariables,
 } from "../__generated__/seePhotoLikes";
 
+//photo 아이디가 존재하지않는다면 skip! useQuery를 건너뛴다.
 export default function Likes({ route }: any) {
-  const { data } = useQuery<seePhotoLikes, seePhotoLikesVariables>(
+  const { data, loading } = useQuery<seePhotoLikes, seePhotoLikesVariables>(
     LIKES_QUERY,
     {
       variables: {
         id: route?.params?.photoId,
       },
+      skip: !route?.params?.photoId,
     }
   );
-  console.log(data);
+
+  // keyExtractor : 필수:string
+  // data : query 명
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "black",
-      }}
-    >
-      <Text style={{ color: "white" }}>Likes</Text>
-    </View>
+    <ViewContainer loading={loading}>
+      <FlatList
+        style={{ width: "100%" }}
+        data={data?.seePhotoLikes}
+        keyExtractor={(item) => "" + item?.id}
+        renderItem={({ item: user }) => (
+          <View>
+            <Text>{user?.username}</Text>
+          </View>
+        )}
+      />
+    </ViewContainer>
   );
 }
