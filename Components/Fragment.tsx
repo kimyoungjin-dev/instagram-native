@@ -1,5 +1,15 @@
 import gql from "graphql-tag";
 
+export const USER_FRAGMENT = gql`
+  fragment UserFragment on User {
+    username
+    avatar
+    isMe
+    isFollowing
+    id
+  }
+`;
+
 export const PHOTO_FRAGMENT = gql`
   fragment PhotoFragment on Photo {
     id
@@ -10,7 +20,6 @@ export const PHOTO_FRAGMENT = gql`
   }
 `;
 
-//오타주의
 export const COMMENT_FRAGMENT = gql`
   fragment CommentFragment on Comment {
     id
@@ -50,6 +59,7 @@ export const FEED_QUERY = gql`
   ${PHOTO_FRAGMENT}
 `;
 
+//toggleLikeMutation
 export const TOGGLE_LIKE_MUTATION = gql`
   mutation toggleLike($id: Int!) {
     toggleLike(id: $id) {
@@ -57,4 +67,14 @@ export const TOGGLE_LIKE_MUTATION = gql`
       error
     }
   }
+`;
+
+//User Query
+export const LIKES_QUERY = gql`
+  query seePhotoLikes($id: Int!) {
+    seePhotoLikes(id: $id) {
+      ...UserFragment
+    }
+  }
+  ${USER_FRAGMENT}
 `;
