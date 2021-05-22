@@ -125,10 +125,17 @@ export default function Photo({
     });
   }, [file]);
 
+  const goToProfile = () => {
+    navigation.navigate("Profile", {
+      username: user.username,
+      id: user.id,
+    });
+  };
+
   return (
     <Container style={{ borderBottomWidth: 0.3, borderBottomColor: "white" }}>
       <Header>
-        <User onPress={() => navigation.navigate("Profile")}>
+        <User onPress={goToProfile}>
           <UserAvatar
             resizeMode="cover"
             source={{ uri: user.avatar || undefined }}
@@ -200,7 +207,7 @@ export default function Photo({
         </TouchableOpacity>
 
         <Caption>
-          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+          <TouchableOpacity onPress={goToProfile}>
             <UserName>{user.username}</UserName>
           </TouchableOpacity>
           <CaptionText>{caption}</CaptionText>

@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import styled from "styled-components/native";
 import { UserFragment } from "../__generated__/UserFragment";
@@ -9,7 +10,7 @@ const Container = styled.View`
   justify-content: space-between;
 `;
 
-const Column = styled.View`
+const Column = styled.TouchableOpacity`
   align-items: center;
   margin-right: 10px;
 `;
@@ -44,7 +45,7 @@ const FollowText = styled.Text`
 
 type LikePick = Pick<
   UserFragment,
-  "avatar" | "username" | "isFollowing" | "isMe"
+  "avatar" | "username" | "isFollowing" | "isMe" | "id"
 >;
 
 export default function UserRow({
@@ -52,10 +53,18 @@ export default function UserRow({
   avatar,
   isFollowing,
   isMe,
+  id,
 }: LikePick) {
+  const navigation = useNavigation();
+  const goToProfile = () => {
+    navigation.navigate("Profile", {
+      username,
+      id,
+    });
+  };
   return (
     <Container>
-      <Column>
+      <Column onPress={goToProfile}>
         <Avatar source={{ uri: avatar || undefined }} />
         <UserName>{username}</UserName>
       </Column>
