@@ -189,7 +189,13 @@ export default function Photo({
           </HeartMessage>
         </HeartMessageBox>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Likes")}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Likes", {
+              photoId: id,
+            })
+          }
+        >
           <Likes>{likes === 1 ? "1 Likes" : `${likes} Likes`}</Likes>
         </TouchableOpacity>
 
