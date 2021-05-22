@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, ListRenderItem, Text, View } from "react-native";
 import Photo from "../Components/Feed/Photo";
 import { FEED_QUERY } from "../Components/Fragment";
 import ViewContainer from "../Components/ViewContainer";
@@ -16,6 +16,7 @@ export default function Feed({ navigation }: any) {
 
   //flatlist는 현재 화면에 보이는것만 랜더링을 한다.
   //FlatList.showsVerticalScrollIndicator 스크롤바를 지워준다.
+
   return (
     <ViewContainer loading={loading}>
       <FlatList
