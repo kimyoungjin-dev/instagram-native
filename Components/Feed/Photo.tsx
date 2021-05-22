@@ -1,5 +1,5 @@
-import { FontAwesome } from "@expo/vector-icons";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { Image, TouchableOpacity, useWindowDimensions } from "react-native";
 import styled from "styled-components/native";
@@ -40,9 +40,13 @@ const ExtraContainer = styled.View`
   padding: 10px;
 `;
 
-const Actions = styled.TouchableOpacity``;
+const HeartMessageBox = styled.TouchableOpacity`
+  flex-direction: row;
+`;
 
-const Action = styled.TouchableOpacity``;
+const HeartMessage = styled.TouchableOpacity`
+  margin-right: 8px;
+`;
 
 const Caption = styled.View`
   flex-direction: row;
@@ -126,12 +130,30 @@ export default function Photo({
       />
 
       <ExtraContainer>
-        <Actions>
-          <Action />
-          <Action />
-        </Actions>
+        <HeartMessageBox>
+          <HeartMessage>
+            <Ionicons
+              name={likes > 0 ? "ios-heart-circle" : "ios-heart-circle-outline"}
+              size={28}
+              color={likes === 0 ? "white" : "skyblue"}
+            />
+          </HeartMessage>
+          <HeartMessage onPress={() => navigation.navigate("Comments")}>
+            <Ionicons
+              name={
+                commentNumber === 0
+                  ? "chatbubble-outline"
+                  : "chatbubble-ellipses-outline"
+              }
+              size={28}
+              color="white"
+            />
+          </HeartMessage>
+        </HeartMessageBox>
 
-        <Likes>{likes === 1 ? "1 Likes" : `${likes} Likes`}</Likes>
+        <TouchableOpacity onPress={() => navigation.navigate("Likes")}>
+          <Likes>{likes === 1 ? "1 Likes" : `${likes} Likes`}</Likes>
+        </TouchableOpacity>
 
         <Caption>
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
