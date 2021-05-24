@@ -21,8 +21,8 @@ export default function LoggedInNav() {
         activeTintColor: "white",
         showLabel: false,
         style: {
-          backgroundColor: theme.mode === "dark" ? "white" : "black",
-          borderTopColor: theme.mode === "dark" ? "white" : "black",
+          backgroundColor: theme.mode === "dark" ? "black" : "white",
+          borderTopColor: theme.mode === "dark" ? "black" : "white",
         },
       }}
     >
