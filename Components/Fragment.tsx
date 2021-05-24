@@ -89,3 +89,21 @@ export const ME_QUERY = gql`
     }
   }
 `;
+
+export const CREAT_COMMENT_MUTATION = gql`
+  mutation createComment($photoId: Int!, $payload: String!) {
+    createComment(photoId: $photoId, payload: $payload) {
+      ok
+      id
+      error
+    }
+  }
+`;
+
+export const DELETE_COMMENT_MUTATION = gql`
+  mutation deleteComment($id: Int!) {
+    deleteComment(id: $id) {
+      ok
+    }
+  }
+`;
