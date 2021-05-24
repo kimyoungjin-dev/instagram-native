@@ -79,3 +79,13 @@ export const LIKES_QUERY = gql`
   }
   ${USER_FRAGMENT}
 `;
+
+export const ME_QUERY = gql`
+  query Me {
+    me {
+      id
+      username
+      avatar
+    }
+  }
+`;
