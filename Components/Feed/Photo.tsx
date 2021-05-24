@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { Image, TouchableOpacity, useWindowDimensions } from "react-native";
 import styled from "styled-components/native";
+import Comments from "../../Pages/Comments";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
 import {
   toggleLike,
@@ -54,15 +55,6 @@ const HeartMessage = styled.TouchableOpacity`
   margin-right: 8px;
 `;
 
-const Caption = styled.View`
-  flex-direction: row;
-`;
-
-const CaptionText = styled.Text`
-  color: white;
-  margin-left: 8px;
-`;
-
 const Likes = styled.Text`
   color: white;
   margin: 5px 0px;
@@ -71,7 +63,14 @@ const Likes = styled.Text`
 
 type PhotoPick = Pick<
   seeFeed_seeFeed,
-  "id" | "user" | "caption" | "file" | "isLiked" | "likes" | "commentNumber"
+  | "id"
+  | "user"
+  | "caption"
+  | "file"
+  | "isLiked"
+  | "likes"
+  | "commentNumber"
+  | "comments"
 >;
 
 export default function Photo({
@@ -82,6 +81,7 @@ export default function Photo({
   isLiked,
   likes,
   commentNumber,
+  comments,
 }: PhotoPick) {
   const [toggleLikeMutation] = useMutation<toggleLike, toggleLikeVariables>(
     TOGGLE_LIKE_MUTATION,
@@ -178,9 +178,9 @@ export default function Photo({
         <HeartMessageBox>
           <HeartMessage onPress={() => toggleLikeMutation()}>
             <Ionicons
-              name={likes > 0 ? "ios-heart-circle" : "ios-heart-circle-outline"}
+              name={isLiked ? "ios-heart-circle" : "ios-heart-circle-outline"}
               size={28}
-              color={likes === 0 ? "white" : "tomato"}
+              color={isLiked ? "tomato" : "white"}
             />
           </HeartMessage>
           <HeartMessage onPress={() => navigation.navigate("Comments")}>
@@ -206,12 +206,14 @@ export default function Photo({
           <Likes>{likes === 1 ? "1 Likes" : `${likes} Likes`}</Likes>
         </TouchableOpacity>
 
-        <Caption>
-          <TouchableOpacity onPress={goToProfile}>
-            <UserName>{user.username}</UserName>
-          </TouchableOpacity>
-          <CaptionText>{caption}</CaptionText>
-        </Caption>
+        <Comments
+          photoId={id}
+          author={user.username}
+          caption={caption}
+          commentNumber={commentNumber}
+          comments={comments}
+          userId={user.id}
+        />
       </ExtraContainer>
     </Container>
   );
