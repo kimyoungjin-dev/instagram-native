@@ -10,6 +10,7 @@ import { Image } from "react-native";
 import { useTheme } from "../styles/ChangeMode";
 import Likes from "../Pages/Likes";
 import Comments from "../Pages/Comments";
+import Hashtag from "../Components/Feed/Hashtag";
 
 interface IProps {
   screenName: string;
@@ -64,6 +65,7 @@ export default function SharedNav({ screenName }: IProps) {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Photo" component={Photo} />
       <Stack.Screen name="Likes" component={Likes} />
+      <Stack.Screen name="Hashtag" component={Hashtag} />
       <Stack.Screen name="Comments" component={Comments} />
     </Stack.Navigator>
   );
