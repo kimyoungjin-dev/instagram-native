@@ -30,13 +30,13 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const onFinish = () => setLoading(false);
 
-  const preloadAssets = () => {
+  const preloadAssets = async () => {
     const images = getImages([
       "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/840px-Instagram_logo.svg.png",
       require("./assets/instagram_logo.png"),
     ]);
     const fonts = getFonts([Ionicons.font, FontAwesome.font]);
-    return Promise.all([...images, ...fonts]);
+    return await Promise.all([...images, ...fonts]);
   };
 
   //AsyncStorage 으로 부터 token을 받아온다.
