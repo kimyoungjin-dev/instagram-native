@@ -26,7 +26,7 @@ export const logUserOut = async () => {
 };
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri: "http://0a47763674c6.ngrok.io/graphql",
 });
 //token을 헤더에 넣기위해서 setContext 사용 (setContext는 자동 import가 안됨으로 import경로를 알고있어야한다.)
 //tokenVar안에 value를 넣지않고 호출만 한다면, 현재 value만을 받아온다.
