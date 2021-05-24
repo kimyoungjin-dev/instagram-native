@@ -1,6 +1,5 @@
-import { parseType } from "graphql";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 import FindHahtag from "../Components/FindHahtag";
 import {
   seeFeed_seeFeed_comments,
@@ -10,12 +9,6 @@ import {
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/core";
 
-interface UpdatedProps {
-  payload: seeFeed_seeFeed_comments["payload"];
-  author: seeFeed_seeFeed_comments_user["username"];
-  userId: seeFeed_seeFeed_user["id"];
-}
-
 const Container = styled.View`
   flex-direction: row;
 `;
@@ -24,6 +17,12 @@ const CommentUser = styled.Text`
   color: white;
   font-weight: bold;
 `;
+
+interface UpdatedProps {
+  payload: seeFeed_seeFeed_comments["payload"];
+  author: seeFeed_seeFeed_comments_user["username"];
+  userId: seeFeed_seeFeed_user["id"];
+}
 
 export default function Comment({ author, payload, userId }: UpdatedProps) {
   const navigation = useNavigation();
