@@ -33,6 +33,19 @@ export const COMMENT_FRAGMENT = gql`
   }
 `;
 
+export const NEWCOMMENT = gql`
+  fragment NEWCOMMENT on Comment {
+    id
+    user {
+      username
+      avatar
+    }
+    payload
+    isMine
+    createdAt
+  }
+`;
+
 //seeFeed
 export const FEED_QUERY = gql`
   query seeFeed($offset: Int!) {
@@ -90,9 +103,9 @@ export const ME_QUERY = gql`
   }
 `;
 
-export const CREAT_COMMENT_MUTATION = gql`
-  mutation createComment($photoId: Int!, $payload: String!) {
-    createComment(photoId: $photoId, payload: $payload) {
+export const DELETE_COMMENT = gql`
+  mutation deleteComment($id: Int!) {
+    deleteComment(id: $id) {
       ok
       id
       error
@@ -100,10 +113,12 @@ export const CREAT_COMMENT_MUTATION = gql`
   }
 `;
 
-export const DELETE_COMMENT_MUTATION = gql`
-  mutation deleteComment($id: Int!) {
-    deleteComment(id: $id) {
+export const CREAT_COMMENT_MUTATION = gql`
+  mutation createComment($photoId: Int!, $payload: String!) {
+    createComment(photoId: $photoId, payload: $payload) {
       ok
+      id
+      error
     }
   }
 `;
