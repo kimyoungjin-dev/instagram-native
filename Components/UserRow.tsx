@@ -33,12 +33,12 @@ const FollowBtn = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   padding: 6px 12px;
-  background-color: blue;
+  background-color: orange;
   border-radius: 7px;
 `;
 
 const FollowText = styled.Text`
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.fontColor};
   font-weight: bold;
   font-size: 18px;
 `;
