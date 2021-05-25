@@ -4,13 +4,14 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { Image, TouchableOpacity, useWindowDimensions } from "react-native";
 import styled from "styled-components/native";
-import Comments from "../../Pages/Comments";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
 import {
   toggleLike,
   toggleLikeVariables,
 } from "../../__generated__/toggleLike";
 import { TOGGLE_LIKE_MUTATION } from "../Fragment";
+import { FatText } from "../Shared/Shared";
+import Comments from "./Comments";
 
 const Container = styled.View``;
 
@@ -55,10 +56,8 @@ const HeartMessage = styled.TouchableOpacity`
   margin-right: 8px;
 `;
 
-const Likes = styled.Text`
-  color: white;
+const Likes = styled(FatText)`
   margin: 5px 0px;
-  font-weight: bold;
 `;
 
 type PhotoPick = Pick<
@@ -180,10 +179,11 @@ export default function Photo({
             <Ionicons
               name={isLiked ? "ios-heart-circle" : "ios-heart-circle-outline"}
               size={28}
-              color={isLiked ? "tomato" : "white"}
+              color={isLiked ? "skyblue" : "white"}
             />
           </HeartMessage>
-          <HeartMessage onPress={() => navigation.navigate("Comments")}>
+
+          <HeartMessage>
             <Ionicons
               name={
                 commentNumber === 0
@@ -207,12 +207,11 @@ export default function Photo({
         </TouchableOpacity>
 
         <Comments
-          photoId={id}
           author={user.username}
           caption={caption}
           commentNumber={commentNumber}
           comments={comments}
-          userId={user.id}
+          photoId={id}
         />
       </ExtraContainer>
     </Container>
