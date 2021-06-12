@@ -7,8 +7,7 @@ import { TouchableOpacity } from "react-native";
 import DarkModeSwitch from "../Shared/DarkModeSwitch";
 import SubmitBtn from "../LoginShared/SubmitBtn";
 import Logo from "../LoginShared/Logo";
-
-type Props = StackScreenProps<RootStackParamList, "Welcome">;
+import { WelcomeProps } from "../../Navigation/NavigationProps";
 
 const Container = styled(defaultBox)`
   background-color: ${(props) => props.theme.fontColor};
@@ -29,7 +28,7 @@ const FirstVisit = styled.Text`
   color: ${(props) => props.theme.bgColor};
 `;
 
-export default function Welcome({ navigation }: Props) {
+export default function Welcome({ navigation }: WelcomeProps) {
   return (
     <Container>
       <DarkModeSwitch />

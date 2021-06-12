@@ -1,11 +1,10 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import React from "react";
 import { TouchableOpacity, Text, View } from "react-native";
+import { SignUpProps } from "../../Navigation/NavigationProps";
 import { RootStackParamList } from "../RootStack";
 
-type Props = StackScreenProps<RootStackParamList, "SignUp">;
-
-export default function SignUp({ navigation }: Props) {
+export default function SignUp({ navigation }: SignUpProps) {
   return (
     <View>
       <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
