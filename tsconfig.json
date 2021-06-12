@@ -11,11 +11,12 @@
     "strict": true,
     "target": "esnext"
   },
+  "extends": "expo/tsconfig.base",
+
   "exclude": [
     "node_modules",
     "babel.config.js",
     "metro.config.js",
     "jest.config.js"
-  ],
-  "extends": "expo/tsconfig.base"
+  ]
 }
