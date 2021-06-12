@@ -1,8 +1,6 @@
-import { StackScreenProps } from "@react-navigation/stack";
 import React from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import { SignUpProps } from "../../Navigation/NavigationProps";
-import { RootStackParamList } from "../RootStack";
 
 export default function SignUp({ navigation }: SignUpProps) {
   return (
