@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Switch, Text } from "react-native";
+import React from "react";
+import { Switch } from "react-native";
 import { useTheme } from "../styles/ChangeMode";
 import styled from "styled-components/native";
 
@@ -8,13 +8,12 @@ const SwitchBox = styled.View`
   align-items: center;
   flex-direction: row;
   justify-content: flex-end;
-  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const SwitchText = styled.Text`
   font-weight: bold;
   margin-right: 5px;
-  color: ${(props) => props.theme.fontColor};
+  color: ${(props) => props.theme.bgColor};
 `;
 
 export default function DarkModeSwitch() {
@@ -28,7 +27,7 @@ export default function DarkModeSwitch() {
         onValueChange={onValueChange}
         value={mode === "dark"}
         trackColor={{ false: "white", true: "black" }}
-        thumbColor={mode === "light" ? "black" : "white"}
+        thumbColor={mode === "light" ? "white" : "white"}
       />
     </SwitchBox>
   );
