@@ -17,6 +17,7 @@ export default function LogOutNav() {
       screenOptions={{
         headerBackTitleVisible: false,
         headerTintColor: darkMode.fontColor,
+        headerShown: false,
         headerStyle: {
           backgroundColor: darkMode.bgColor,
           shadowOpacity: 0,
@@ -26,7 +27,7 @@ export default function LogOutNav() {
       <Stack.Screen
         name="Welcome"
         component={Welcome}
-        options={{ title: "WelCome to instagram", headerShown: false }}
+        options={{ title: "WelCome to instagram" }}
       />
       <Stack.Screen
         name="Login"
