@@ -7,5 +7,7 @@ declare module "styled-components" {
     loginBtnColor: string;
     borderColor: string;
     silverColor: string;
+    inputColor: string;
+    faceBookLoginTextColor: string;
   }
 }

@@ -33,8 +33,8 @@ export default function DarkModeSwitch() {
         <Switch
           onValueChange={onValueChange}
           value={mode === "dark"}
-          trackColor={{ false: "white", true: "black" }}
-          thumbColor={mode === "light" ? "white" : "white"}
+          trackColor={{ false: "black", true: "silver" }}
+          thumbColor={mode === "light" ? "black" : "black"}
         />
       </SwitchBox>
     </DarkModeBox>
