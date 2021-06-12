@@ -26,7 +26,7 @@ export default function LogOutNav() {
       <Stack.Screen
         name="Welcome"
         component={Welcome}
-        options={{ title: "WelCome to instagram" }}
+        options={{ title: "WelCome to instagram", headerShown: false }}
       />
       <Stack.Screen
         name="Login"
