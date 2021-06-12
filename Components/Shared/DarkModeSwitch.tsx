@@ -3,6 +3,12 @@ import { Switch } from "react-native";
 import { useTheme } from "../styles/ChangeMode";
 import styled from "styled-components/native";
 
+const DarkModeBox = styled.View`
+  position: absolute;
+  top: 100px;
+  right: 30px;
+`;
+
 const SwitchBox = styled.View`
   display: flex;
   align-items: center;
@@ -21,14 +27,16 @@ export default function DarkModeSwitch() {
   const onValueChange = (value: boolean) => setMode(value ? "dark" : "light");
 
   return (
-    <SwitchBox>
-      <SwitchText>{mode === "light" ? "다크모드" : "라이트모드"}</SwitchText>
-      <Switch
-        onValueChange={onValueChange}
-        value={mode === "dark"}
-        trackColor={{ false: "white", true: "black" }}
-        thumbColor={mode === "light" ? "white" : "white"}
-      />
-    </SwitchBox>
+    <DarkModeBox>
+      <SwitchBox>
+        <SwitchText>{mode === "light" ? "다크모드" : "라이트모드"}</SwitchText>
+        <Switch
+          onValueChange={onValueChange}
+          value={mode === "dark"}
+          trackColor={{ false: "white", true: "black" }}
+          thumbColor={mode === "light" ? "white" : "white"}
+        />
+      </SwitchBox>
+    </DarkModeBox>
   );
 }
