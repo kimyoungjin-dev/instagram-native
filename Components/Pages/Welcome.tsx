@@ -2,10 +2,11 @@ import { StackScreenProps } from "@react-navigation/stack";
 import React from "react";
 import { RootStackParamList } from "../RootStack";
 import styled from "styled-components/native";
-import { defaultBox, modeColor } from "../Shared/SharedStyles";
+import { defaultBox } from "../Shared/SharedStyles";
 import { TouchableOpacity } from "react-native";
 import DarkModeSwitch from "../Shared/DarkModeSwitch";
-import { useTheme } from "../styles/ChangeMode";
+import SubmitBtn from "../LoginShared/SubmitBtn";
+import { modeColor } from "../Shared/SharedFunction";
 
 type Props = StackScreenProps<RootStackParamList, "Welcome">;
 
@@ -23,21 +24,6 @@ const DarkModeBox = styled.View`
 const Logo = styled.Image`
   width: 100%;
   height: 120px;
-`;
-
-const Login = styled.TouchableOpacity`
-  border-radius: 5px;
-  background-color: blue;
-  padding: 10px 0px;
-  width: 100%;
-  margin-bottom: 30px;
-`;
-
-const LoginText = styled.Text`
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
 `;
 
 const SignUp = styled.View`
@@ -67,11 +53,7 @@ export default function Welcome({ navigation }: Props) {
         style={{ tintColor: modeColor() }}
       />
 
-      <Login>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <LoginText>로그인</LoginText>
-        </TouchableOpacity>
-      </Login>
+      <SubmitBtn text="로그인" routerName="Login" />
 
       <SignUp>
         <FirstVisit>instagram에 처음 오셨나요?</FirstVisit>
