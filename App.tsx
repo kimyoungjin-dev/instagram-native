@@ -4,10 +4,12 @@ import AppLoading from "expo-app-loading";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import Font from "expo-font";
 import { Asset } from "expo-asset";
+import { NavigationContainer } from "@react-navigation/native";
+import LogOutNav from "./Navigation/LogOutNav";
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(false);
-  const onFinish = () => setIsLoading(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const onFinish = () => setIsLoading(false);
   const preLoad = async () => {
     //font
     const fontsToLoad = [Ionicons.font, FontAwesome.font];
@@ -22,15 +24,15 @@ export default function App() {
   return (
     <>
       {isLoading ? (
-        <View>
-          <Text>is Ready!</Text>
-        </View>
-      ) : (
         <AppLoading
           startAsync={preLoad}
           onError={() => console.warn}
           onFinish={onFinish}
         />
+      ) : (
+        <NavigationContainer>
+          <LogOutNav />
+        </NavigationContainer>
       )}
     </>
   );
