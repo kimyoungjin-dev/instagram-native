@@ -9,7 +9,7 @@ import { Appearance } from "react-native-appearance";
 import { ThemeProvider } from "styled-components/native";
 import { darkTheme, lightTheme } from "./styles";
 import { defaultMode } from "./DefaultMode";
-import { ChangeModeProps } from "../Shared/InterFace";
+import { ChildrenProps } from "../Shared/InterFace";
 
 const ThemeContext = createContext({
   mode: defaultMode,
@@ -19,7 +19,7 @@ const ThemeContext = createContext({
 
 export const useTheme = () => React.useContext(ThemeContext);
 
-export const ManageThemeProvider = ({ children }: ChangeModeProps) => {
+export const ManageThemeProvider = ({ children }: ChildrenProps) => {
   const [themeState, setThemeState] = useState(defaultMode);
   const setMode = (
     mode: SetStateAction<"light" | "dark" | "no-preference">

@@ -1,4 +1,4 @@
-export interface ChangeModeProps {
+export interface ChildrenProps {
   children: React.ReactNode;
 }
 
