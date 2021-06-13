@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Logo from "../LoginShared/Logo";
 import SubmitBtn from "../LoginShared/SubmitBtn";
 import Form from "../LoginShared/Form";
@@ -7,10 +7,12 @@ import FaceBookLogin from "../LoginShared/FaceBookLogin";
 import MakeSignUpText from "../LoginShared/MakeSignUpText";
 import KeyboardContainer from "../LoginShared/KeyboardContainer";
 import { RouterName } from "../RouterName";
-import { modeColor, onNext, passwordRef } from "../Shared/SharedFunction";
-import { TextInput } from "react-native";
+import { modeColor, onNext, reverseModeColor } from "../Shared/SharedFunction";
+import { TextInput } from "../LoginShared/TextInput";
 
 export default function Login() {
+  const passwordRef = useRef(null);
+
   return (
     <KeyboardContainer>
       <Logo />
@@ -18,16 +20,20 @@ export default function Login() {
       <Form>
         <TextInput
           placeholder="UserName"
-          placeholderTextColor={modeColor()}
+          placeholderTextColor={reverseModeColor()}
           autoCapitalize="none"
           autoCorrect={false}
           returnKeyType="next"
           onSubmitEditing={() => onNext(passwordRef)}
         />
+
         <TextInput
-          ref={passwordRef}
-          secureTextEntry={true}
+          placeholder="Password"
+          placeholderTextColor={reverseModeColor()}
+          autoCapitalize="none"
+          autoCorrect={false}
           returnKeyType="done"
+          secureTextEntry={true}
         />
       </Form>
       <SubmitBtn text="로그인" />

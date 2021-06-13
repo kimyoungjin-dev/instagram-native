@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components/native";
 import Logo from "../LoginShared/Logo";
 import Form from "../LoginShared/Form";
@@ -6,16 +6,9 @@ import SubmitBtn from "../LoginShared/SubmitBtn";
 import MakeSignUpText from "../LoginShared/MakeSignUpText";
 import KeyboardContainer from "../LoginShared/KeyboardContainer";
 import { RouterName } from "../RouterName";
-import {
-  emailRef,
-  firstNameRef,
-  lastNameRef,
-  modeColor,
-  onNext,
-  passwordRef,
-} from "../Shared/SharedFunction";
 import { useForm } from "react-hook-form";
-import { TextInput } from "../LoginShared/Input";
+import { reverseModeColor, onNext } from "../Shared/SharedFunction";
+import { TextInput } from "../LoginShared/TextInput";
 
 const SignUpText = styled.Text`
   font-weight: bold;
@@ -26,6 +19,11 @@ const SignUpText = styled.Text`
 
 export default function SignUp() {
   const { handleSubmit, register, setValue } = useForm();
+
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
   useEffect(() => {
     register("username");
@@ -43,7 +41,7 @@ export default function SignUp() {
       <Form>
         <TextInput
           placeholder="User Name"
-          placeholderTextColor={modeColor()}
+          placeholderTextColor={reverseModeColor()}
           onSubmitEditing={() => onNext(firstNameRef)}
           autoCapitalize="none"
           autoCorrect={false}
@@ -53,7 +51,7 @@ export default function SignUp() {
         <TextInput
           ref={firstNameRef}
           placeholder="First Name"
-          placeholderTextColor={modeColor()}
+          placeholderTextColor={reverseModeColor()}
           onSubmitEditing={() => onNext(lastNameRef)}
           autoCapitalize="none"
           autoCorrect={false}
@@ -63,7 +61,7 @@ export default function SignUp() {
         <TextInput
           ref={lastNameRef}
           placeholder="Last Name"
-          placeholderTextColor={modeColor()}
+          placeholderTextColor={reverseModeColor()}
           onSubmitEditing={() => onNext(emailRef)}
           autoCapitalize="none"
           keyboardType="email-address"
@@ -74,7 +72,7 @@ export default function SignUp() {
         <TextInput
           ref={emailRef}
           placeholder="Email"
-          placeholderTextColor={modeColor()}
+          placeholderTextColor={reverseModeColor()}
           onSubmitEditing={() => onNext(passwordRef)}
           autoCapitalize="none"
           autoCorrect={false}
@@ -84,7 +82,7 @@ export default function SignUp() {
         <TextInput
           ref={passwordRef}
           placeholder="Password"
-          placeholderTextColor={modeColor()}
+          placeholderTextColor={reverseModeColor()}
           autoCapitalize="none"
           autoCorrect={false}
           returnKeyType="done"
