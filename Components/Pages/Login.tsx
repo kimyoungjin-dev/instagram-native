@@ -1,9 +1,6 @@
 import React, { useRef } from "react";
-import styled from "styled-components/native";
 import Logo from "../LoginShared/Logo";
-import { defaultBox } from "../Shared/SharedStyles";
 import SubmitBtn from "../LoginShared/SubmitBtn";
-import DarkModeSwitch from "../Shared/DarkModeSwitch";
 import Form from "../LoginShared/Form";
 import Seperate from "../LoginShared/Seperate";
 import FaceBookLogin from "../LoginShared/FaceBookLogin";
