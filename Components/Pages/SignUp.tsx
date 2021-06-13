@@ -9,6 +9,14 @@ import { RouterName } from "../RouterName";
 import { useForm } from "react-hook-form";
 import { reverseModeColor, onNext } from "../Shared/SharedFunction";
 import { TextInput } from "../LoginShared/TextInput";
+import { useMutation } from "@apollo/client";
+import { CREATE_ACCOUNT_MUTATION } from "../Fragment";
+import {
+  createAccount,
+  createAccountVariables,
+} from "../../__generated__/createAccount";
+import { CreateAccountProps } from "../Shared/InterFace";
+import ErrorMessage from "../LoginShared/ErrorMessage";
 
 const SignUpText = styled.Text`
   font-weight: bold;
@@ -18,7 +26,30 @@ const SignUpText = styled.Text`
 `;
 
 export default function SignUp() {
-  const { handleSubmit, register, setValue } = useForm();
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors, isValid },
+    setError,
+    watch,
+  } = useForm<CreateAccountProps>({ mode: "onChange" });
+
+  const [createAccount_Mutation, { loading }] = useMutation<
+    createAccount,
+    createAccountVariables
+  >(CREATE_ACCOUNT_MUTATION, {
+    onCompleted: (data) => {
+      const {
+        createAccount: { ok, error },
+      } = data;
+      if (!ok) {
+        setError("result", {
+          message: error || undefined,
+        });
+      }
+    },
+  });
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -27,22 +58,30 @@ export default function SignUp() {
 
   useEffect(() => {
     register("username", {
-      required: true,
+      required: "Username is Required",
     });
+
     register("firstName", {
-      required: true,
+      required: "FirstName is Required",
     });
+
     register("lastName");
+
     register("email", {
-      required: true,
+      required: "Email is Required",
     });
+
     register("password", {
-      required: true,
+      required: "Password is Required",
     });
   }, [register]);
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    createAccount_Mutation({
+      variables: {
+        ...data,
+      },
+    });
   };
 
   return (
@@ -60,6 +99,7 @@ export default function SignUp() {
           returnKeyType="next"
           onChangeText={(value) => setValue("username", value)}
         />
+        <ErrorMessage text={errors.username?.message} />
 
         <TextInput
           ref={firstNameRef}
@@ -71,6 +111,7 @@ export default function SignUp() {
           returnKeyType="next"
           onChangeText={(value) => setValue("firstName", value)}
         />
+        <ErrorMessage text={errors.firstName?.message} />
 
         <TextInput
           ref={lastNameRef}
@@ -83,6 +124,7 @@ export default function SignUp() {
           returnKeyType="next"
           onChangeText={(value) => setValue("lastName", value)}
         />
+        <ErrorMessage text={errors.lastName?.message} />
 
         <TextInput
           ref={emailRef}
@@ -94,6 +136,7 @@ export default function SignUp() {
           returnKeyType="next"
           onChangeText={(value) => setValue("email", value)}
         />
+        <ErrorMessage text={errors.email?.message} />
 
         <TextInput
           ref={passwordRef}
@@ -103,11 +146,24 @@ export default function SignUp() {
           autoCorrect={false}
           returnKeyType="done"
           secureTextEntry={true}
-          onChangeText={(value) => setValue("passwords", value)}
+          onChangeText={(value) => setValue("password", value)}
           onSubmitEditing={() => handleSubmit(onSubmit)}
         />
+        <ErrorMessage text={errors.password?.message} />
 
-        <SubmitBtn text="회원가입" onPress={handleSubmit(onSubmit)} />
+        <SubmitBtn
+          text="회원가입"
+          onPress={handleSubmit(onSubmit)}
+          loading={loading}
+          disabled={
+            !watch("username") ||
+            !watch("firstName") ||
+            !watch("email") ||
+            !watch("password") ||
+            loading
+          }
+        />
+        <ErrorMessage text={errors.result?.message} />
       </Form>
 
       <MakeSignUpText
