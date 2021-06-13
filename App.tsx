@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { ApolloProvider } from "@apollo/client";
 import { Appearance, AppearanceProvider } from "react-native-appearance";
 import AppLoading from "expo-app-loading";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
@@ -11,6 +11,7 @@ import { ThemeProvider } from "styled-components/native";
 import { darkTheme, lightTheme } from "./Components/styles/styles";
 import { useTheme } from "./Components/styles/ChangeMode";
 import ThemeManager from "./Components/styles/ThemeManaget";
+import { client } from "./Apollo";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,15 +39,17 @@ export default function App() {
           onFinish={onFinish}
         />
       ) : (
-        <AppearanceProvider>
-          <ThemeProvider theme={light ? lightTheme : darkTheme}>
-            <ThemeManager>
-              <NavigationContainer>
-                <LogOutNav />
-              </NavigationContainer>
-            </ThemeManager>
-          </ThemeProvider>
-        </AppearanceProvider>
+        <ApolloProvider client={client}>
+          <AppearanceProvider>
+            <ThemeProvider theme={light ? lightTheme : darkTheme}>
+              <ThemeManager>
+                <NavigationContainer>
+                  <LogOutNav />
+                </NavigationContainer>
+              </ThemeManager>
+            </ThemeProvider>
+          </AppearanceProvider>
+        </ApolloProvider>
       )}
     </>
   );
