@@ -15,8 +15,12 @@ export default function Login() {
   const { register, handleSubmit, setValue } = useForm();
 
   useEffect(() => {
-    register("username");
-    register("password");
+    register("username", {
+      required: true,
+    });
+    register("password", {
+      required: true,
+    });
   }, [register]);
 
   const onSubmit = (data: any) => {
