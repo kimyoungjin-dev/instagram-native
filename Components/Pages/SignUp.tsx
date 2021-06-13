@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components/native";
 import Logo from "../LoginShared/Logo";
 import Form from "../LoginShared/Form";
 import SubmitBtn from "../LoginShared/SubmitBtn";
 import MakeSignUpText from "../LoginShared/MakeSignUpText";
-import Input from "../LoginShared/Input";
 import KeyboardContainer from "../LoginShared/KeyboardContainer";
 import { RouterName } from "../RouterName";
 import {
   emailRef,
   firstNameRef,
   lastNameRef,
+  modeColor,
+  onNext,
   passwordRef,
 } from "../Shared/SharedFunction";
+import { useForm } from "react-hook-form";
+import { TextInput } from "../LoginShared/Input";
 
 const SignUpText = styled.Text`
   font-weight: bold;
@@ -22,39 +25,74 @@ const SignUpText = styled.Text`
 `;
 
 export default function SignUp() {
+  const { handleSubmit, register, setValue } = useForm();
+
+  useEffect(() => {
+    register("username");
+    register("firstName");
+    register("lastName");
+    register("email");
+    register("password");
+  }, [register]);
+
   return (
     <KeyboardContainer>
       <Logo />
-
       <SignUpText>인스타그램 계정 만들기</SignUpText>
 
       <Form>
-        <Input placeholderText="User Name" nextRef={firstNameRef} />
-        <Input
-          placeholderText="First Name"
-          refName={firstNameRef}
-          nextRef={lastNameRef}
+        <TextInput
+          placeholder="User Name"
+          placeholderTextColor={modeColor()}
+          onSubmitEditing={() => onNext(firstNameRef)}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="next"
         />
-        <Input
-          placeholderText="Last Name"
-          refName={lastNameRef}
-          nextRef={emailRef}
+
+        <TextInput
+          ref={firstNameRef}
+          placeholder="First Name"
+          placeholderTextColor={modeColor()}
+          onSubmitEditing={() => onNext(lastNameRef)}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="next"
         />
-        <Input
-          placeholderText="Email"
-          isEmail={true}
-          refName={emailRef}
-          nextRef={passwordRef}
+
+        <TextInput
+          ref={lastNameRef}
+          placeholder="Last Name"
+          placeholderTextColor={modeColor()}
+          onSubmitEditing={() => onNext(emailRef)}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          autoCorrect={false}
+          returnKeyType="next"
         />
-        <Input
-          placeholderText="Password"
-          isPassword={true}
-          isLast={true}
-          refName={passwordRef}
+
+        <TextInput
+          ref={emailRef}
+          placeholder="Email"
+          placeholderTextColor={modeColor()}
+          onSubmitEditing={() => onNext(passwordRef)}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="next"
         />
+
+        <TextInput
+          ref={passwordRef}
+          placeholder="Password"
+          placeholderTextColor={modeColor()}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="done"
+          secureTextEntry={true}
+        />
+
         <SubmitBtn text="가입" />
       </Form>
-
       <MakeSignUpText
         link={RouterName.Login}
         text="계정이 있으신가요?"
