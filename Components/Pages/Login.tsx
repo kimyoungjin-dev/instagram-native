@@ -10,8 +10,23 @@ import { RouterName } from "../RouterName";
 import { onNext, reverseModeColor } from "../Shared/SharedFunction";
 import { TextInput } from "../LoginShared/TextInput";
 import { useForm } from "react-hook-form";
+import { gql, useMutation } from "@apollo/client";
+
+const LOGIN_MUTATION = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      ok
+      error
+      token
+    }
+  }
+`;
 
 export default function Login() {
+  const [login_mutation, { loading }] = useMutation(LOGIN_MUTATION, {
+    onCompleted: () => {},
+  });
+
   const { register, handleSubmit, setValue } = useForm();
 
   useEffect(() => {
