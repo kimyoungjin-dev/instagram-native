@@ -1,5 +1,5 @@
 import React from "react";
-import { Keyboard, TouchableWithoutFeedback } from "react-native";
+import { Keyboard, Platform, TouchableWithoutFeedback } from "react-native";
 import styled from "styled-components/native";
 import DarkModeSwitch from "../Shared/DarkModeSwitch";
 import { ChildrenProps } from "../Shared/InterFace";
@@ -23,7 +23,10 @@ export default function KeyboardContainer({ children }: ChildrenProps) {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => dismissKeyboard()}>
+    <TouchableWithoutFeedback
+      onPress={() => dismissKeyboard()}
+      disabled={Platform.OS === "web"}
+    >
       <Container>
         <DarkModeSwitch />
         <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={0}>
