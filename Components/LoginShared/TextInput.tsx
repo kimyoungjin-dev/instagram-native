@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components/native";
-import { modeColor } from "../Shared/SharedFunction";
+import { reverseModeColor } from "../Shared/SharedFunction";
 
 interface TextInputProps {
   placeholderText: string;
   isPassword?: boolean;
+  isLast?: boolean;
+  isEmail?: boolean;
 }
 
 const STextInput = styled.TextInput`
@@ -19,14 +21,18 @@ const STextInput = styled.TextInput`
 export default function TextInput({
   placeholderText,
   isPassword,
+  isLast,
+  isEmail,
 }: TextInputProps) {
   return (
     <STextInput
       placeholder={placeholderText}
-      placeholderTextColor={modeColor()}
+      placeholderTextColor={reverseModeColor()}
       autoCapitalize="none"
       autoCorrect={false}
       secureTextEntry={isPassword}
+      returnKeyType={isLast ? "done" : "next"}
+      keyboardType={isEmail ? "email-address" : undefined}
     />
   );
 }
