@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { ApolloProvider } from "@apollo/client";
+import { ApolloProvider, useReactiveVar } from "@apollo/client";
 import { Appearance, AppearanceProvider } from "react-native-appearance";
 import AppLoading from "expo-app-loading";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import Font from "expo-font";
 import { Asset } from "expo-asset";
 import { NavigationContainer } from "@react-navigation/native";
-import LogOutNav from "./Navigation/LogOutNav";
 import { ThemeProvider } from "styled-components/native";
 import { darkTheme, lightTheme } from "./Components/styles/styles";
-import { useTheme } from "./Components/styles/ChangeMode";
 import ThemeManager from "./Components/styles/ThemeManaget";
-import { client } from "./Apollo.ts";
+import client, { isLoggedInVar } from "./Apollo";
+import LogOutNav from "./Navigation/LogOutNav";
+import LoginNav from "./Navigation/LoginNav";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,8 +29,8 @@ export default function App() {
   };
 
   const light = Appearance.getColorScheme() === "light";
-  const { mode } = useTheme();
-  const darkMode = mode === "light" ? lightTheme : darkTheme;
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
+  console.log(isLoggedIn);
   return (
     <>
       {isLoading ? (
@@ -45,7 +45,7 @@ export default function App() {
             <ThemeProvider theme={light ? lightTheme : darkTheme}>
               <ThemeManager>
                 <NavigationContainer>
-                  <LogOutNav />
+                  {isLoggedIn ? <LoginNav /> : <LogOutNav />}
                 </NavigationContainer>
               </ThemeManager>
             </ThemeProvider>
