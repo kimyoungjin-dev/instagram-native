@@ -5,9 +5,8 @@ export const darkTheme: DefaultTheme = {
   fontColor: "black",
   loginBtnColor: "rgb(69,166,246)",
   borderColor: "white",
-  silverColor: "silver",
-  inputColor: "silver",
   faceBookLoginTextColor: "white",
+  silverWhiteColor: "white",
 };
 
 export const lightTheme: DefaultTheme = {
@@ -15,7 +14,6 @@ export const lightTheme: DefaultTheme = {
   fontColor: "white",
   loginBtnColor: "rgb(69,166,246)",
   borderColor: "black",
-  silverColor: "silver",
-  inputColor: "silver",
   faceBookLoginTextColor: "blue",
+  silverWhiteColor: "silver",
 };
