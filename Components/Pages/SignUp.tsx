@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import Logo from "../LoginShared/Logo";
 import Form from "../LoginShared/Form";
