@@ -8,10 +8,9 @@ import MakeSignUpText from "../LoginShared/MakeSignUpText";
 import Input from "../LoginShared/Input";
 import KeyboardContainer from "../LoginShared/KeyboardContainer";
 import { RouterName } from "../RouterName";
+import { passwordRef } from "../Shared/SharedFunction";
 
 export default function Login() {
-  const passwordRef = useRef(null);
-
   return (
     <KeyboardContainer>
       <Logo />

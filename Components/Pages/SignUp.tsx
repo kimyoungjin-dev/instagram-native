@@ -7,6 +7,12 @@ import MakeSignUpText from "../LoginShared/MakeSignUpText";
 import Input from "../LoginShared/Input";
 import KeyboardContainer from "../LoginShared/KeyboardContainer";
 import { RouterName } from "../RouterName";
+import {
+  emailRef,
+  firstNameRef,
+  lastNameRef,
+  passwordRef,
+} from "../Shared/SharedFunction";
 
 const SignUpText = styled.Text`
   font-weight: bold;
@@ -16,11 +22,6 @@ const SignUpText = styled.Text`
 `;
 
 export default function SignUp() {
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-
   return (
     <KeyboardContainer>
       <Logo />
