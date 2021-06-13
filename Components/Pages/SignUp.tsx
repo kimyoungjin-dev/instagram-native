@@ -29,8 +29,8 @@ export default function SignUp() {
         <TextInput placeholderText="User Name" />
         <TextInput placeholderText="First Name" />
         <TextInput placeholderText="Last Name" />
-        <TextInput placeholderText="Email" />
-        <TextInput placeholderText="Password" isPassword={true} />
+        <TextInput placeholderText="Email" isEmail={true} />
+        <TextInput placeholderText="Password" isPassword={true} isLast={true} />
         <SubmitBtn text="가입" />
       </Form>
 

@@ -24,7 +24,7 @@ export default function Login() {
 
       <Form>
         <TextInput placeholderText="userName" />
-        <TextInput placeholderText="Password" isPassword={true} />
+        <TextInput placeholderText="Password" isPassword={true} isLast={true} />
       </Form>
 
       <SubmitBtn text="로그인" />
