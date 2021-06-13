@@ -11,12 +11,13 @@ const SignUp = styled.View`
 const SignUpText = styled.Text`
   color: ${(props) => props.theme.bgColor};
   margin-left: 8px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
 `;
 
 const FirstVisit = styled.Text`
   color: ${(props) => props.theme.bgColor};
+  font-size: 16px;
 `;
 
 export default function MakeSignUpText({

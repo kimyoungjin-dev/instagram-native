@@ -10,7 +10,6 @@ import { TextInput } from "../LoginShared/TextInput";
 import Seperate from "../LoginShared/Seperate";
 import FaceBookLogin from "../LoginShared/FaceBookLogin";
 import MakeSignUpText from "../LoginShared/MakeSignUpText";
-import { Ionicons } from "@expo/vector-icons";
 
 const Container = styled(defaultBox)`
   background-color: ${(props) => props.theme.fontColor};
@@ -30,6 +29,7 @@ export default function Login() {
           autoCapitalize="none"
           autoCorrect={false}
         />
+
         <TextInput
           placeholder="Password"
           placeholderTextColor={modeColor()}
