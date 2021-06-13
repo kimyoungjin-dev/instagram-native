@@ -3,11 +3,10 @@ import styled from "styled-components/native";
 import { defaultBox } from "../Shared/SharedStyles";
 import Logo from "../LoginShared/Logo";
 import DarkModeSwitch from "../Shared/DarkModeSwitch";
-import { TextInput } from "../LoginShared/TextInput";
 import Form from "../LoginShared/Form";
 import SubmitBtn from "../LoginShared/SubmitBtn";
-import { modeColor } from "../Shared/SharedFunction";
 import MakeSignUpText from "../LoginShared/MakeSignUpText";
+import TextInput from "../LoginShared/TextInput";
 
 const Container = styled(defaultBox)`
   background-color: ${(props) => props.theme.fontColor};
@@ -27,39 +26,11 @@ export default function SignUp() {
       <Logo />
       <SignUpText>인스타그램 계정 만들기</SignUpText>
       <Form>
-        <TextInput
-          placeholder="User Name"
-          placeholderTextColor={modeColor()}
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-        <TextInput
-          placeholder="First Name"
-          placeholderTextColor={modeColor()}
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-        <TextInput
-          placeholder="Last Name"
-          placeholderTextColor={modeColor()}
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-        <TextInput
-          placeholder="Email"
-          placeholderTextColor={modeColor()}
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-
-        <TextInput
-          placeholder="Password"
-          placeholderTextColor={modeColor()}
-          autoCapitalize="none"
-          autoCorrect={false}
-          secureTextEntry={true}
-        />
-
+        <TextInput placeholderText="User Name" />
+        <TextInput placeholderText="First Name" />
+        <TextInput placeholderText="Last Name" />
+        <TextInput placeholderText="Email" />
+        <TextInput placeholderText="Password" isPassword={true} />
         <SubmitBtn text="가입" />
       </Form>
 
