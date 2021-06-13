@@ -33,6 +33,10 @@ export default function SignUp() {
     register("password");
   }, [register]);
 
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <KeyboardContainer>
       <Logo />
@@ -46,6 +50,7 @@ export default function SignUp() {
           autoCapitalize="none"
           autoCorrect={false}
           returnKeyType="next"
+          onChangeText={(value) => setValue("username", value)}
         />
 
         <TextInput
@@ -56,6 +61,7 @@ export default function SignUp() {
           autoCapitalize="none"
           autoCorrect={false}
           returnKeyType="next"
+          onChangeText={(value) => setValue("firstName", value)}
         />
 
         <TextInput
@@ -67,6 +73,7 @@ export default function SignUp() {
           keyboardType="email-address"
           autoCorrect={false}
           returnKeyType="next"
+          onChangeText={(value) => setValue("lastName", value)}
         />
 
         <TextInput
@@ -77,6 +84,7 @@ export default function SignUp() {
           autoCapitalize="none"
           autoCorrect={false}
           returnKeyType="next"
+          onChangeText={(value) => setValue("email", value)}
         />
 
         <TextInput
@@ -87,10 +95,13 @@ export default function SignUp() {
           autoCorrect={false}
           returnKeyType="done"
           secureTextEntry={true}
+          onChangeText={(value) => setValue("passwords", value)}
+          onSubmitEditing={() => handleSubmit(onSubmit)}
         />
 
-        <SubmitBtn text="가입" />
+        <SubmitBtn text="회원가입" onPress={handleSubmit(onSubmit)} />
       </Form>
+
       <MakeSignUpText
         link={RouterName.Login}
         text="계정이 있으신가요?"

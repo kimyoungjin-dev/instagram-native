@@ -2,7 +2,6 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import { SubmitBtnProps } from "../Shared/InterFace";
-import { useNavigation } from "@react-navigation/native";
 
 const Login = styled.TouchableOpacity`
   border-radius: 5px;
@@ -19,11 +18,10 @@ const LoginText = styled.Text`
   text-align: center;
 `;
 
-export default function SubmitBtn({ text, routerName }: SubmitBtnProps) {
-  const navigation = useNavigation();
+export default function SubmitBtn({ text, onPress }: SubmitBtnProps) {
   return (
     <Login>
-      <TouchableOpacity onPress={() => navigation.navigate(`${routerName}`)}>
+      <TouchableOpacity onPress={onPress}>
         <LoginText>{text}</LoginText>
       </TouchableOpacity>
     </Login>
