@@ -1,14 +1,15 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import { SubmitBtnProps } from "../Shared/InterFace";
 
-const Login = styled.TouchableOpacity`
+const Login = styled.TouchableOpacity<{ disabled: boolean }>`
   border-radius: 5px;
   background-color: blue;
   padding: 10px 0px;
   width: 100%;
   margin-bottom: 30px;
+  opacity: ${(props) => (props.disabled ? "0.2" : "1")};
 `;
 
 const LoginText = styled.Text`
@@ -18,12 +19,19 @@ const LoginText = styled.Text`
   text-align: center;
 `;
 
-export default function SubmitBtn({ text, onPress }: SubmitBtnProps) {
+export default function SubmitBtn({
+  disabled,
+  loading,
+  text,
+  onPress,
+}: SubmitBtnProps) {
   return (
-    <Login>
-      <TouchableOpacity onPress={onPress}>
+    <Login disabled={disabled} onPress={onPress}>
+      {loading ? (
+        <ActivityIndicator color="white" />
+      ) : (
         <LoginText>{text}</LoginText>
-      </TouchableOpacity>
+      )}
     </Login>
   );
 }
