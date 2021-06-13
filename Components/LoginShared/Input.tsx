@@ -1,8 +1,11 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
+import { Alert, TextInput } from "react-native";
 import styled from "styled-components/native";
 import { reverseModeColor } from "../Shared/SharedFunction";
 
 interface TextInputProps {
+  refName?: React.Ref<TextInput>;
+  nextRef?: MutableRefObject<null>;
   placeholderText: string;
   isPassword?: boolean;
   isLast?: boolean;
@@ -18,14 +21,25 @@ const STextInput = styled.TextInput`
   padding-left: 10px;
 `;
 
-export default function TextInput({
+export default function Input({
   placeholderText,
-  isPassword,
-  isLast,
-  isEmail,
+  isPassword = false,
+  isLast = false,
+  isEmail = false,
+  nextRef,
+  refName,
 }: TextInputProps) {
+  const onNext = (value: any) => {
+    value?.current?.focus();
+  };
+
+  const onDone = () => {
+    Alert.alert("finish");
+  };
+
   return (
     <STextInput
+      ref={refName}
       placeholder={placeholderText}
       placeholderTextColor={reverseModeColor()}
       autoCapitalize="none"
@@ -33,6 +47,13 @@ export default function TextInput({
       secureTextEntry={isPassword}
       returnKeyType={isLast ? "done" : "next"}
       keyboardType={isEmail ? "email-address" : undefined}
+      onSubmitEditing={() => {
+        if (!isLast) {
+          return onNext(nextRef);
+        } else {
+          return onDone();
+        }
+      }}
     />
   );
 }
