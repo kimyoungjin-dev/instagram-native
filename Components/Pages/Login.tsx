@@ -9,40 +9,62 @@ import KeyboardContainer from "../LoginShared/KeyboardContainer";
 import { RouterName } from "../RouterName";
 import { onNext, reverseModeColor } from "../Shared/SharedFunction";
 import { TextInput } from "../LoginShared/TextInput";
-import { useForm } from "react-hook-form";
-import { gql, useMutation } from "@apollo/client";
-
-const LOGIN_MUTATION = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      ok
-      error
-      token
-    }
-  }
-`;
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useMutation } from "@apollo/client";
+import { LOGIN_MUTATION } from "../Fragment";
+import { login, loginVariables } from "../../__generated__/login";
+import { LoginProps } from "../Shared/InterFace";
+import ErrorMessage from "../LoginShared/ErrorMessage";
 
 export default function Login() {
-  const [login_mutation, { loading }] = useMutation(LOGIN_MUTATION, {
-    onCompleted: () => {},
-  });
+  const [login_mutation, { loading }] = useMutation<login, loginVariables>(
+    LOGIN_MUTATION,
+    {
+      onCompleted: (data) => {
+        const {
+          login: { ok, error, token },
+        } = data;
+        if (!ok) {
+          setError("result", {
+            message: error || undefined,
+          });
+        }
+      },
+    }
+  );
 
-  const { register, handleSubmit, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    setError,
+    watch,
+    formState: { errors, isValid },
+  } = useForm<LoginProps>({ mode: "onChange" });
 
   useEffect(() => {
     register("username", {
-      required: true,
+      required: "Username is required",
     });
     register("password", {
-      required: true,
+      required: "Password is required",
     });
   }, [register]);
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<loginVariables> = (data) => {
+    if (loading) {
+      return;
+    }
+
+    login_mutation({
+      variables: {
+        ...data,
+      },
+    });
   };
 
   const passwordRef = useRef(null);
+
   return (
     <KeyboardContainer>
       <Logo />
@@ -57,6 +79,7 @@ export default function Login() {
           returnKeyType="next"
           onSubmitEditing={() => onNext(passwordRef)}
         />
+        <ErrorMessage text={errors.username?.message || undefined} />
 
         <TextInput
           onChangeText={(value) => setValue("password", value)}
@@ -68,9 +91,19 @@ export default function Login() {
           secureTextEntry={true}
           onSubmitEditing={() => handleSubmit(onSubmit)}
         />
+        <ErrorMessage text={errors.password?.message || undefined} />
       </Form>
 
-      <SubmitBtn text="로그인" onPress={handleSubmit(onSubmit)} />
+      <SubmitBtn
+        text="로그인"
+        onPress={handleSubmit(onSubmit)}
+        loading={loading}
+        disabled={!watch("username") || !watch("password")}
+      />
+      <ErrorMessage
+        text={errors?.result?.message || undefined}
+        errorMargin={true}
+      />
 
       <Seperate />
 
