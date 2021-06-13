@@ -11,11 +11,6 @@ export const reverseModeColor = () => {
   return mode === "light" ? "white" : "black";
 };
 
-export const firstNameRef = useRef(null);
-export const lastNameRef = useRef(null);
-export const emailRef = useRef(null);
-export const passwordRef = useRef(null);
-
 export const onNext = (value: any) => {
   value?.current?.focus();
 };
