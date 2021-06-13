@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components/native";
 import Logo from "../LoginShared/Logo";
 import { defaultBox } from "../Shared/SharedStyles";
@@ -8,23 +8,25 @@ import Form from "../LoginShared/Form";
 import Seperate from "../LoginShared/Seperate";
 import FaceBookLogin from "../LoginShared/FaceBookLogin";
 import MakeSignUpText from "../LoginShared/MakeSignUpText";
-import TextInput from "../LoginShared/TextInput";
-
-const Container = styled(defaultBox)`
-  background-color: ${(props) => props.theme.fontColor};
-  padding: 0px 20px;
-`;
+import Input from "../LoginShared/Input";
+import KeyboardContainer from "../LoginShared/KeyboardContainer";
+import { RouterName } from "../RouterName";
 
 export default function Login() {
-  return (
-    <Container>
-      <DarkModeSwitch />
+  const passwordRef = useRef(null);
 
+  return (
+    <KeyboardContainer>
       <Logo />
 
       <Form>
-        <TextInput placeholderText="userName" />
-        <TextInput placeholderText="Password" isPassword={true} isLast={true} />
+        <Input placeholderText="userName" nextRef={passwordRef} />
+        <Input
+          placeholderText="Password"
+          isPassword={true}
+          isLast={true}
+          refName={passwordRef}
+        />
       </Form>
 
       <SubmitBtn text="로그인" />
@@ -34,10 +36,10 @@ export default function Login() {
       <FaceBookLogin />
 
       <MakeSignUpText
-        link="SignUp"
+        link={RouterName.SignUp}
         text="계정이 없으신가요?"
         colorText="가입하기"
       />
-    </Container>
+    </KeyboardContainer>
   );
 }

@@ -1,17 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components/native";
-import { defaultBox } from "../Shared/SharedStyles";
 import Logo from "../LoginShared/Logo";
-import DarkModeSwitch from "../Shared/DarkModeSwitch";
 import Form from "../LoginShared/Form";
 import SubmitBtn from "../LoginShared/SubmitBtn";
 import MakeSignUpText from "../LoginShared/MakeSignUpText";
-import TextInput from "../LoginShared/TextInput";
-
-const Container = styled(defaultBox)`
-  background-color: ${(props) => props.theme.fontColor};
-  padding: 0px 20px;
-`;
+import Input from "../LoginShared/Input";
+import KeyboardContainer from "../LoginShared/KeyboardContainer";
+import { RouterName } from "../RouterName";
 
 const SignUpText = styled.Text`
   font-weight: bold;
@@ -21,25 +16,49 @@ const SignUpText = styled.Text`
 `;
 
 export default function SignUp() {
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
   return (
-    <Container>
-      <DarkModeSwitch />
+    <KeyboardContainer>
       <Logo />
+
       <SignUpText>인스타그램 계정 만들기</SignUpText>
+
       <Form>
-        <TextInput placeholderText="User Name" />
-        <TextInput placeholderText="First Name" />
-        <TextInput placeholderText="Last Name" />
-        <TextInput placeholderText="Email" isEmail={true} />
-        <TextInput placeholderText="Password" isPassword={true} isLast={true} />
+        <Input placeholderText="User Name" nextRef={firstNameRef} />
+        <Input
+          placeholderText="First Name"
+          refName={firstNameRef}
+          nextRef={lastNameRef}
+        />
+        <Input
+          placeholderText="Last Name"
+          refName={lastNameRef}
+          nextRef={emailRef}
+        />
+        <Input
+          placeholderText="Email"
+          isEmail={true}
+          refName={emailRef}
+          nextRef={passwordRef}
+        />
+        <Input
+          placeholderText="Password"
+          isPassword={true}
+          isLast={true}
+          refName={passwordRef}
+        />
         <SubmitBtn text="가입" />
       </Form>
 
       <MakeSignUpText
-        link="Login"
+        link={RouterName.Login}
         text="계정이 있으신가요?"
         colorText="로그인"
       />
-    </Container>
+    </KeyboardContainer>
   );
 }
