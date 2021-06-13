@@ -11,11 +11,12 @@ import { ThemeProvider } from "styled-components/native";
 import { darkTheme, lightTheme } from "./Components/styles/styles";
 import { useTheme } from "./Components/styles/ChangeMode";
 import ThemeManager from "./Components/styles/ThemeManaget";
-import { client } from "./Apollo";
+import { client } from "./Apollo.ts";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const onFinish = () => setIsLoading(false);
+
   const preLoad = async () => {
     //font
     const fontsToLoad = [Ionicons.font, FontAwesome.font];
