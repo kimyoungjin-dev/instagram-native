@@ -17,6 +17,7 @@ const SignUpText = styled.Text`
   font-weight: bold;
   font-size: 17px;
   margin-bottom: 20px;
+  color: ${(props) => props.theme.bgColor};
 `;
 
 export default function SignUp() {
