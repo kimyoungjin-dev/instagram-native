@@ -26,11 +26,19 @@ export default function SignUp() {
   const passwordRef = useRef(null);
 
   useEffect(() => {
-    register("username");
-    register("firstName");
+    register("username", {
+      required: true,
+    });
+    register("firstName", {
+      required: true,
+    });
     register("lastName");
-    register("email");
-    register("password");
+    register("email", {
+      required: true,
+    });
+    register("password", {
+      required: true,
+    });
   }, [register]);
 
   const onSubmit = (data: any) => {
