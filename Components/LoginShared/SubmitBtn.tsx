@@ -14,7 +14,7 @@ const Login = styled.TouchableOpacity`
 
 const LoginText = styled.Text`
   color: white;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: bold;
   text-align: center;
 `;

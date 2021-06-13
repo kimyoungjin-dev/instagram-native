@@ -23,6 +23,7 @@ const SwitchText = styled.Text`
   font-weight: bold;
   margin-right: 5px;
   color: ${(props) => props.theme.bgColor};
+  font-size: 14px;
 `;
 
 export default function DarkModeSwitch() {

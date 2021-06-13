@@ -11,7 +11,7 @@ const SFaceBookLogin = styled.View`
 const FaceBookLoginText = styled.Text`
   color: ${(props) => props.theme.faceBookLoginTextColor};
   margin-left: 10px;
-  font-size: 17px;
+  font-size: 15px;
 `;
 
 export default function FaceBookLogin() {
