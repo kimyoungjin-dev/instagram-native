@@ -1,108 +1,135 @@
-import React from "react";
-import { useWindowDimensions, View } from "react-native";
-import styled from "styled-components/native";
+import React, { useEffect, useState } from "react";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
+import styled from "styled-components/native";
 import Avatar from "../Shared/Avatar";
-import { defaultBox, flexRow_AlignCenter } from "../Shared/SharedStyles";
-import { Entypo, Ionicons, AntDesign, Feather } from "@expo/vector-icons";
+import { useWindowDimensions } from "react-native";
+import { Image } from "react-native";
+import { FatText, flexRow_AlignCenter } from "../Shared/SharedStyles";
+import { View } from "react-native";
+import {
+  Entypo,
+  Ionicons,
+  MaterialCommunityIcons,
+  Feather,
+} from "@expo/vector-icons";
+import Like from "./Like";
+import { modeColor } from "../Shared/SharedFunction";
+import Caption from "./Caption";
 
-const Container = styled(defaultBox)`
+const Container = styled.View`
   margin-bottom: 50px;
 `;
 
-const Header = styled.View`
-  flex-direction: row;
-  align-items: center;
+const Header = styled(flexRow_AlignCenter)`
   justify-content: space-between;
-  padding: 10px;
-  width: 100%;
+  padding: 0px 10px;
 `;
 
-const UserAvatar_Name = styled(flexRow_AlignCenter)``;
+const UserInfo = styled(flexRow_AlignCenter)`
+  padding: 10px;
+`;
 
-const UserName = styled.Text`
-  font-weight: bold;
+const Username = styled(FatText)`
+  font-size: 17px;
+  color: ${(props) => props.theme.bgColor};
   margin-left: 10px;
-  font-size: 15px;
 `;
 
 const File = styled.Image`
-  width: 100%;
-  height: 100px;
+  margin-bottom: 15px;
 `;
 
-const InfoMation = styled.View`
-  padding: 0px 20px;
-  width: 100%;
+const Contents = styled.View`
+  padding: 0px 10px;
 `;
 
-const Action = styled.View`
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  margin: 10px 0px;
+const Icons = styled(flexRow_AlignCenter)`
   justify-content: space-between;
 `;
 
-const LeftIcon = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
+const LeftIcons = styled(flexRow_AlignCenter)``;
 
-const Caption = styled.View``;
+const Likes = styled.Text``;
+
+const CaptionBox = styled.View``;
 
 const CaptionText = styled.Text``;
 
 export default function Feed_Photo({
-  id,
-  user,
-  caption,
   file,
-  isLiked,
+  user,
+  id,
   likes,
+  commentNumber,
+  comments,
+  caption,
+  isLiked,
 }: seeFeed_seeFeed) {
+  console.log(isLiked);
   const { width, height } = useWindowDimensions();
+
+  const [imageHeight, setImageHeight] = useState(height - 450);
+  useEffect(() => {
+    Image.getSize(file, (_, height) => {
+      setImageHeight(height / 3);
+    });
+  }, [file]);
+
   return (
     <Container>
       <Header>
-        <UserAvatar_Name>
+        <UserInfo>
           <Avatar uri={user.avatar} />
-          <UserName>{user.username}</UserName>
-        </UserAvatar_Name>
+          <Username>{user.username}</Username>
+        </UserInfo>
+
         <View>
           <Entypo name="dots-three-horizontal" size={24} color="black" />
         </View>
       </Header>
-
       <File
-        source={{ uri: file || undefined }}
-        style={{ width, height: height / 1.8 }}
+        style={{
+          width,
+          height: imageHeight,
+        }}
+        source={{ uri: file }}
       />
-      <InfoMation>
-        <Action>
-          <LeftIcon>
+      <Contents>
+        <Icons>
+          <LeftIcons>
             <Ionicons
-              name="ios-heart-outline"
-              color="black"
+              name={isLiked ? "heart" : "heart-outline"}
               size={30}
-              style={{ marginRight: 15 }}
+              color={modeColor()}
+              style={{ marginRight: 20 }}
             />
-            <AntDesign
-              name="message1"
-              color="black"
-              size={24}
-              style={{ marginRight: 15 }}
+            <MaterialCommunityIcons
+              name={
+                commentNumber > 1
+                  ? "message-processing"
+                  : "message-processing-outline"
+              }
+              size={30}
+              color={modeColor()}
+              style={{ marginRight: 20 }}
             />
-            <Feather name="send" color="black" size={24} />
-          </LeftIcon>
+            <Feather
+              name="bookmark"
+              size={30}
+              color={modeColor()}
+              style={{ marginRight: 20 }}
+            />
+          </LeftIcons>
 
-          <Feather name="bookmark" size={28} color="black" />
-        </Action>
+          <View>
+            <Feather name="send" size={30} color={modeColor()} />
+          </View>
+        </Icons>
 
-        <Caption>
-          <CaptionText>{caption}</CaptionText>
-        </Caption>
-      </InfoMation>
+        <Like photoId={id} likes={likes} />
+
+        <Caption caption={caption} user={user} />
+      </Contents>
     </Container>
   );
 }
