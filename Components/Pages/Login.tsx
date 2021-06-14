@@ -16,28 +16,28 @@ import { login, loginVariables } from "../../__generated__/login";
 import { LoginProps } from "../Shared/InterFace";
 import ErrorMessage from "../LoginShared/ErrorMessage";
 import { LoginNavProps } from "../../Navigation/NavigationProps";
-import { isLoggedInVar } from "../../Apollo";
+import { isLoggedInVar, logUserIn } from "../../Apollo";
 
 export default function Login({ route: { params } }: LoginNavProps) {
+  const onCompleted = (data: login) => {
+    const {
+      login: { ok, error, token },
+    } = data;
+    if (!ok) {
+      setError("result", {
+        message: error || undefined,
+      });
+    }
+    if (ok) {
+      logUserIn(token);
+    }
+  };
   const [login_mutation, { loading }] = useMutation<login, loginVariables>(
     LOGIN_MUTATION,
     {
-      onCompleted: (data) => {
-        const {
-          login: { ok, error, token },
-        } = data;
-        if (!ok) {
-          setError("result", {
-            message: error || undefined,
-          });
-        }
-        if (ok) {
-          isLoggedInVar(true);
-        }
-      },
+      onCompleted,
     }
   );
-
   const {
     register,
     handleSubmit,
