@@ -5,3 +5,8 @@ export const defaultBox = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+export const flexRow_AlignCenter = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
