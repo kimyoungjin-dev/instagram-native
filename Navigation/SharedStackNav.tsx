@@ -7,12 +7,19 @@ import Feed from "../Components/Pages/Feed";
 import Search from "../Components/Pages/Search";
 import Notifications from "../Components/Pages/Notifications";
 import Me from "../Components/Pages/Me";
+import { modeColor } from "../Components/Shared/SharedFunction";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function SharedStackNav({ screenName }: { screenName: string }) {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerBackTitleVisible: false,
+        headerTintColor: modeColor(),
+        headerTransparent: true, //헤더를 지워준다.
+      }}
+    >
       {screenName === "Feed" && <Stack.Screen name={"Feed"} component={Feed} />}
 
       {screenName === "Search" && (
