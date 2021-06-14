@@ -6,6 +6,6 @@ const Container = styled(defaultBox)`
   background-color: ${(props) => props.theme.fontColor};
 `;
 
-export default function Feed() {
-  return <Container></Container>;
+export default function Search() {
+  return <Container>Search</Container>;
 }
