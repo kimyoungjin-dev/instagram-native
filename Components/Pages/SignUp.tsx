@@ -30,7 +30,7 @@ export default function SignUp() {
     handleSubmit,
     register,
     setValue,
-    formState: { errors, isValid },
+    formState: { errors },
     setError,
     watch,
   } = useForm<CreateAccountProps>({ mode: "onChange" });
@@ -59,6 +59,10 @@ export default function SignUp() {
   useEffect(() => {
     register("username", {
       required: "Username is Required",
+      minLength: {
+        message: "Username 4 letters or more",
+        value: 4,
+      },
     });
 
     register("firstName", {
@@ -73,6 +77,10 @@ export default function SignUp() {
 
     register("password", {
       required: "Password is Required",
+      minLength: {
+        message: "Password 4 letters or more",
+        value: 4,
+      },
     });
   }, [register]);
 

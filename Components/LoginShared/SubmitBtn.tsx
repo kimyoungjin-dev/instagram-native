@@ -9,7 +9,7 @@ const Login = styled.TouchableOpacity<{ disabled: boolean }>`
   padding: 10px 0px;
   width: 100%;
   margin-bottom: 30px;
-  opacity: ${(props) => (props.disabled ? "0.2" : "1")};
+  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
 `;
 
 const LoginText = styled.Text`

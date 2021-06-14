@@ -39,7 +39,7 @@ export default function Login() {
     setValue,
     setError,
     watch,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<LoginProps>({ mode: "onChange" });
 
   useEffect(() => {
