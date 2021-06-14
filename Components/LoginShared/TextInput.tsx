@@ -7,4 +7,5 @@ export const TextInput = styled.TextInput`
   border-radius: 4px;
   margin-bottom: 10px;
   padding-left: 10px;
+  color: ${(props) => props.theme.fontColor};
 `;
