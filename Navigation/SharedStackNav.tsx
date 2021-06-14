@@ -17,7 +17,6 @@ export default function SharedStackNav({ screenName }: { screenName: string }) {
       screenOptions={{
         headerBackTitleVisible: false,
         headerTintColor: modeColor(),
-        headerTransparent: true, //헤더를 지워준다.
       }}
     >
       {screenName === "Feed" && <Stack.Screen name={"Feed"} component={Feed} />}
