@@ -8,7 +8,9 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Container = styled(defaultBox)``;
+const Container = styled(defaultBox)`
+  background-color: ${(props) => props.theme.fontColor};
+`;
 
 export default function ScreenContainer({ loading, children }: Props) {
   return <Container>{loading ? <ActivityIndicator /> : children}</Container>;
