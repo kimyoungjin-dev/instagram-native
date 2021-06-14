@@ -5,11 +5,10 @@ import { SubmitBtnProps } from "../Shared/InterFace";
 
 const Login = styled.TouchableOpacity<{ disabled: boolean }>`
   border-radius: 5px;
-  background-color: blue;
+  background-color: ${(props) => (props.disabled ? "skyblue" : "blue")};
   padding: 10px 0px;
   width: 100%;
   margin-bottom: 30px;
-  opacity: ${(props) => (props.disabled ? "0.2" : "1")};
 `;
 
 const LoginText = styled.Text`
