@@ -10,6 +10,7 @@ import {
   modeColor,
   reverseModeColor,
 } from "../Components/Shared/SharedFunction";
+import Camera from "../Components/Pages/Camera";
 
 const Tabs = createBottomTabNavigator<RootStackParamList>();
 
@@ -46,6 +47,20 @@ export default function LogInNav() {
             <Ionicons
               name={focused ? "search" : "search-outline"}
               size={24}
+              color={modeColor()}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="Camera"
+        component={Camera}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? "camera" : "camera-outline"}
+              size={28}
               color={modeColor()}
             />
           ),
