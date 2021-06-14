@@ -9,4 +9,6 @@ export type RootStackParamList = {
   Notifications: undefined;
   Profile: undefined;
   Camera: undefined;
+  Me: undefined;
+  Photo: undefined;
 };
