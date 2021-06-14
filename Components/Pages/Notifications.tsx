@@ -8,5 +8,9 @@ const Container = styled(defaultBox)`
 `;
 
 export default function Notifications() {
-  return <Container>Notifications</Container>;
+  return (
+    <Container>
+      <Text>Notifications</Text>
+    </Container>
+  );
 }

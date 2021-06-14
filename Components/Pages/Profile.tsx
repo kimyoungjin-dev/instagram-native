@@ -8,5 +8,9 @@ const Container = styled(defaultBox)`
 `;
 
 export default function Profile() {
-  return <Container>Profile</Container>;
+  return (
+    <Container>
+      <Text>Profile</Text>
+    </Container>
+  );
 }
