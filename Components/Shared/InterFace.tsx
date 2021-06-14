@@ -31,3 +31,12 @@ export interface ErrorMessageProps {
   text?: string | undefined;
   errorMargin?: boolean;
 }
+
+export interface StringProps {
+  text: string;
+}
+
+export interface AvatarProps {
+  uri?: string | null | undefined;
+  isMargin?: boolean;
+}
