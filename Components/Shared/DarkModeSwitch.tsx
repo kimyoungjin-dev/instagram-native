@@ -9,7 +9,7 @@ const DarkModeBox = styled.View`
   right: 30px;
   padding: 4px 10px;
   border-radius: 10px;
-  border: 1px solid ${(props) => props.theme.borderColor};
+  border: 1px solid ${(props) => props.theme.bgColor};
 `;
 
 const SwitchBox = styled.View`

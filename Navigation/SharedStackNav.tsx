@@ -12,6 +12,7 @@ import {
   reverseModeColor,
 } from "../Components/Shared/SharedFunction";
 import { Image } from "react-native";
+import LikesMember from "../Components/Feed/Like/LikesMember";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -37,7 +38,7 @@ export default function SharedStackNav({ screenName }: { screenName: string }) {
               <Image
                 source={require("../assets/instagram_logo.png")}
                 resizeMode="contain"
-                style={{ width: 140, height: "100%" }}
+                style={{ width: 140, height: "100%", tintColor: modeColor() }}
               />
             ),
           }}
@@ -56,6 +57,11 @@ export default function SharedStackNav({ screenName }: { screenName: string }) {
 
       <Stack.Screen name="Photo" component={Photo} />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen
+        name="LikesMember"
+        component={LikesMember}
+        options={{ headerTitle: "좋아요", headerTintColor: modeColor() }}
+      />
     </Stack.Navigator>
   );
 }
