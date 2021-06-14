@@ -1,17 +1,13 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { RootStackParamList } from "../Components/RootStack";
-import Search from "../Components/Pages/Search";
-import Notifications from "../Components/Pages/Notifications";
 import { Ionicons } from "@expo/vector-icons";
 import {
   modeColor,
   reverseModeColor,
 } from "../Components/Shared/SharedFunction";
 import { View } from "react-native";
-import Me from "../Components/Pages/Me";
 import SharedStackNav from "../Navigation/SharedStackNav";
-import Feed from "../Components/Pages/Feed";
 
 const Tabs = createBottomTabNavigator<RootStackParamList>();
 
