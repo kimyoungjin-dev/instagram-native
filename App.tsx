@@ -9,7 +9,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components/native";
 import { darkTheme, lightTheme } from "./Components/styles/styles";
 import ThemeManager from "./Components/styles/ThemeManaget";
-import client, { isLoggedInVar, TOKEN } from "./Apollo";
+import client, { isLoggedInVar, TOKEN, tokenVar } from "./Apollo";
 import LogOutNav from "./Navigation/LogOutNav";
 import LoginNav from "./Navigation/LoginNav";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -22,7 +22,12 @@ export default function App() {
     const token = await AsyncStorage.getItem(TOKEN);
     if (token) {
       isLoggedInVar(true);
+      tokenVar(token);
     }
+    return preloadAssets();
+  };
+
+  const preloadAssets = async () => {
     const fontsToLoad = [Ionicons.font, FontAwesome.font];
     const imageToLoad = [require("./assets/instagram_logo.png")];
     const fontPromise = fontsToLoad.map((font) => Font.loadAsync(font));
