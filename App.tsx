@@ -18,6 +18,7 @@ import {
   FontAwesome,
   AntDesign,
   Feather,
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
 export default function App() {
@@ -40,6 +41,7 @@ export default function App() {
       Entypo.font,
       AntDesign.font,
       Feather.font,
+      MaterialCommunityIcons.font,
     ];
     const imageToLoad = [require("./assets/instagram_logo.png")];
     const fontPromise = fontsToLoad.map((font) => Font.loadAsync(font));
