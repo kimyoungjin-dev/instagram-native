@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useTheme } from "../styles/ChangeMode";
 
 export const modeColor = () => {
