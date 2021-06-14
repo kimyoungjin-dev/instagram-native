@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ApolloProvider, useReactiveVar } from "@apollo/client";
 import { Appearance, AppearanceProvider } from "react-native-appearance";
 import AppLoading from "expo-app-loading";
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import Font from "expo-font";
 import { Asset } from "expo-asset";
 import { NavigationContainer } from "@react-navigation/native";
@@ -13,6 +12,13 @@ import client, { isLoggedInVar, TOKEN, tokenVar } from "./Apollo";
 import LogOutNav from "./Navigation/LogOutNav";
 import LoginNav from "./Navigation/LoginNav";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  Entypo,
+  Ionicons,
+  FontAwesome,
+  AntDesign,
+  Feather,
+} from "@expo/vector-icons";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +34,13 @@ export default function App() {
   };
 
   const preloadAssets = async () => {
-    const fontsToLoad = [Ionicons.font, FontAwesome.font];
+    const fontsToLoad = [
+      Ionicons.font,
+      FontAwesome.font,
+      Entypo.font,
+      AntDesign.font,
+      Feather.font,
+    ];
     const imageToLoad = [require("./assets/instagram_logo.png")];
     const fontPromise = fontsToLoad.map((font) => Font.loadAsync(font));
     const imagePromise = imageToLoad.map((image) => Asset.loadAsync(image));
