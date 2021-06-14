@@ -18,6 +18,7 @@ import {
 import { CreateAccountProps } from "../Shared/InterFace";
 import ErrorMessage from "../LoginShared/ErrorMessage";
 import { SignUpNavProps } from "../../Navigation/NavigationProps";
+import { login_login } from "../../__generated__/login";
 
 const SignUpText = styled.Text`
   font-weight: bold;
@@ -37,27 +38,29 @@ export default function SignUp({ navigation }: SignUpNavProps) {
     getValues,
   } = useForm<CreateAccountProps>({ mode: "onChange" });
 
+  const onCompleted = (data: createAccount) => {
+    const { username, password } = getValues();
+    const {
+      createAccount: { ok, error },
+    } = data;
+    if (!ok) {
+      setError("result", {
+        message: error || undefined,
+      });
+    }
+    if (ok) {
+      navigation.navigate("Login", {
+        username,
+        password,
+      });
+    }
+  };
+
   const [createAccount_Mutation, { loading }] = useMutation<
     createAccount,
     createAccountVariables
   >(CREATE_ACCOUNT_MUTATION, {
-    onCompleted: (data) => {
-      const { username, password } = getValues();
-      const {
-        createAccount: { ok, error },
-      } = data;
-      if (!ok) {
-        setError("result", {
-          message: error || undefined,
-        });
-      }
-      if (ok) {
-        navigation.navigate("Login", {
-          username,
-          password,
-        });
-      }
-    },
+    onCompleted,
   });
 
   const firstNameRef = useRef(null);
