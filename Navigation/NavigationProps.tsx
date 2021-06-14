@@ -9,7 +9,5 @@ export type LoginNavProps = {
   route: LoginRouteProp;
 };
 //
-
 export type SignUpNavProps = StackScreenProps<RootStackParamList, "SignUp">;
 export type WelcomeNavProps = StackScreenProps<RootStackParamList, "Welcome">;
-export type FeedNavProps = StackScreenProps<RootStackParamList, "Feed">;
