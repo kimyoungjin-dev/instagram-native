@@ -1,16 +1,17 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { RootStackParamList } from "../Components/RootStack";
-import Feed from "../Components/Pages/Feed";
 import Search from "../Components/Pages/Search";
 import Notifications from "../Components/Pages/Notifications";
-import Profile from "../Components/Pages/Profile";
 import { Ionicons } from "@expo/vector-icons";
 import {
   modeColor,
   reverseModeColor,
 } from "../Components/Shared/SharedFunction";
 import { View } from "react-native";
+import Me from "../Components/Pages/Me";
+import SharedStackNav from "../Navigation/SharedStackNav";
+import Feed from "../Components/Pages/Feed";
 
 const Tabs = createBottomTabNavigator<RootStackParamList>();
 
@@ -27,7 +28,6 @@ export default function LogInNav() {
     >
       <Tabs.Screen
         name="Feed"
-        component={Feed}
         options={{
           tabBarIcon: ({ focused }) => (
             <Ionicons
@@ -37,11 +37,12 @@ export default function LogInNav() {
             />
           ),
         }}
-      />
+      >
+        {() => <SharedStackNav screenName="Feed" />}
+      </Tabs.Screen>
 
       <Tabs.Screen
         name="Search"
-        component={Search}
         options={{
           tabBarIcon: ({ focused }) => (
             <Ionicons
@@ -51,7 +52,9 @@ export default function LogInNav() {
             />
           ),
         }}
-      />
+      >
+        {() => <SharedStackNav screenName="Search" />}
+      </Tabs.Screen>
 
       <Tabs.Screen
         name="Camera"
@@ -69,7 +72,6 @@ export default function LogInNav() {
 
       <Tabs.Screen
         name="Notifications"
-        component={Notifications}
         options={{
           tabBarIcon: ({ focused }) => (
             <Ionicons
@@ -79,11 +81,12 @@ export default function LogInNav() {
             />
           ),
         }}
-      />
+      >
+        {() => <SharedStackNav screenName="Notifications" />}
+      </Tabs.Screen>
 
       <Tabs.Screen
-        name="Profile"
-        component={Profile}
+        name="Me"
         options={{
           tabBarIcon: ({ focused }) => (
             <Ionicons
@@ -93,7 +96,9 @@ export default function LogInNav() {
             />
           ),
         }}
-      />
+      >
+        {() => <SharedStackNav screenName="Me" />}
+      </Tabs.Screen>
     </Tabs.Navigator>
   );
 }
