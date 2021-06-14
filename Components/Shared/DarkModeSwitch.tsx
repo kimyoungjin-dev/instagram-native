@@ -28,6 +28,7 @@ const SwitchText = styled.Text`
 
 export default function DarkModeSwitch() {
   const { setMode, mode } = useTheme();
+
   const onValueChange = (value: boolean) => setMode(value ? "dark" : "light");
 
   return (
