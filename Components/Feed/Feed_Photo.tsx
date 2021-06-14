@@ -12,12 +12,14 @@ import {
   MaterialCommunityIcons,
   Feather,
 } from "@expo/vector-icons";
-import Like from "./Like";
+import Like from "./Like/Like";
 import { modeColor } from "../Shared/SharedFunction";
 import Caption from "./Caption";
+import DarkModeSwitch from "../Shared/DarkModeSwitch";
 
 const Container = styled.View`
   margin-bottom: 50px;
+  border: 1px solid ${(props) => props.theme.borderColor};
 `;
 
 const Header = styled(flexRow_AlignCenter)`
@@ -77,6 +79,9 @@ export default function Feed_Photo({
 
   return (
     <Container>
+      <View style={{ zIndex: 100 }}>
+        <DarkModeSwitch />
+      </View>
       <Header>
         <UserInfo>
           <Avatar uri={user.avatar} />
@@ -84,7 +89,7 @@ export default function Feed_Photo({
         </UserInfo>
 
         <View>
-          <Entypo name="dots-three-horizontal" size={24} color="black" />
+          <Entypo name="dots-three-horizontal" size={24} color={modeColor()} />
         </View>
       </Header>
       <File

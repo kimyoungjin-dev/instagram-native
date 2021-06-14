@@ -11,4 +11,6 @@ export type RootStackParamList = {
   Camera: undefined;
   Me: undefined;
   Photo: undefined;
+  Like: { photoId: number };
+  LikesMember: { photoId: number };
 };

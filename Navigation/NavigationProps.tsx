@@ -24,3 +24,15 @@ export type MeNavProps = StackScreenProps<RootStackParamList, "Me">;
 //shared Stack
 export type PhotoNavProps = StackScreenProps<RootStackParamList, "Photo">;
 export type ProfileNavProps = StackScreenProps<RootStackParamList, "Profile">;
+
+//compoents//
+//(likes)
+export type LikeNavProps = StackScreenProps<RootStackParamList, "Like">;
+
+//(LikesMember)
+type LikesMemberScreenNav = StackScreenProps<RootStackParamList, "LikesMember">;
+type LikesMemberRouteProp = RouteProp<RootStackParamList, "LikesMember">;
+export type LikesMemberNavProps = {
+  navigation: LikesMemberScreenNav;
+  route: LikesMemberRouteProp;
+};
