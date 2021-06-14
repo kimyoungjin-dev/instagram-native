@@ -13,19 +13,17 @@ const Stack = createStackNavigator<RootStackParamList>();
 export default function SharedStackNav({ screenName }: { screenName: string }) {
   return (
     <Stack.Navigator>
-      {screenName === "Feed" ? (
-        <Stack.Screen name={"Feed"} component={Feed} />
-      ) : null}
+      {screenName === "Feed" && <Stack.Screen name={"Feed"} component={Feed} />}
 
-      {screenName === "Search" ? (
+      {screenName === "Search" && (
         <Stack.Screen component={Search} name="Search" />
-      ) : null}
+      )}
 
-      {screenName === "Notifications" ? (
+      {screenName === "Notifications" && (
         <Stack.Screen component={Notifications} name="Notifications" />
-      ) : null}
+      )}
 
-      {screenName === "Me" ? <Stack.Screen component={Me} name="Me" /> : null}
+      {screenName === "Me" && <Stack.Screen component={Me} name="Me" />}
 
       <Stack.Screen name="Photo" component={Photo} />
       <Stack.Screen name="Profile" component={Profile} />
