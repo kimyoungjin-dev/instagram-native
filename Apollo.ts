@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const TOKEN = "TOKEN";
+export const TOKEN = "TOKEN";
 
 export const isLoggedInVar = makeVar(Boolean(AsyncStorage.getItem(TOKEN)));
 

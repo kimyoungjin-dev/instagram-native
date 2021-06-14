@@ -9,33 +9,35 @@ import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components/native";
 import { darkTheme, lightTheme } from "./Components/styles/styles";
 import ThemeManager from "./Components/styles/ThemeManaget";
-import client, { isLoggedInVar } from "./Apollo";
+import client, { isLoggedInVar, TOKEN } from "./Apollo";
 import LogOutNav from "./Navigation/LogOutNav";
 import LoginNav from "./Navigation/LoginNav";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const onFinish = () => setIsLoading(false);
 
-  const preLoad = async () => {
-    //font
+  const preload = async () => {
+    const token = await AsyncStorage.getItem(TOKEN);
+    if (token) {
+      isLoggedInVar(true);
+    }
     const fontsToLoad = [Ionicons.font, FontAwesome.font];
-    const fontPromise = fontsToLoad.map((font) => Font.loadAsync(font));
-    //image
     const imageToLoad = [require("./assets/instagram_logo.png")];
+    const fontPromise = fontsToLoad.map((font) => Font.loadAsync(font));
     const imagePromise = imageToLoad.map((image) => Asset.loadAsync(image));
-    //promiss
     await Promise.all([fontPromise, imagePromise]);
   };
 
   const light = Appearance.getColorScheme() === "light";
   const isLoggedIn = useReactiveVar(isLoggedInVar);
-  console.log(isLoggedIn);
+
   return (
     <>
       {isLoading ? (
         <AppLoading
-          startAsync={preLoad}
+          startAsync={preload}
           onError={() => console.warn}
           onFinish={onFinish}
         />
