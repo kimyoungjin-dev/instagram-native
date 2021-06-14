@@ -10,7 +10,7 @@ import {
   modeColor,
   reverseModeColor,
 } from "../Components/Shared/SharedFunction";
-import Camera from "../Components/Pages/Camera";
+import { View } from "react-native";
 
 const Tabs = createBottomTabNavigator<RootStackParamList>();
 
@@ -55,7 +55,7 @@ export default function LogInNav() {
 
       <Tabs.Screen
         name="Camera"
-        component={Camera}
+        component={View}
         options={{
           tabBarIcon: ({ focused }) => (
             <Ionicons
