@@ -16,6 +16,7 @@ export default function Feed() {
   return (
     <ScreenContainer loading={loading}>
       <FlatList
+        showsVerticalScrollIndicator={false} //모바일의 스크롤바를 가려줌
         style={{ width: "100%" }}
         data={data?.seeFeed}
         keyExtractor={(item) => "" + item?.id}
