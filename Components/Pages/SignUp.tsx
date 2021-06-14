@@ -17,6 +17,7 @@ import {
 } from "../../__generated__/createAccount";
 import { CreateAccountProps } from "../Shared/InterFace";
 import ErrorMessage from "../LoginShared/ErrorMessage";
+import { SignUpNavProps } from "../../Navigation/NavigationProps";
 
 const SignUpText = styled.Text`
   font-weight: bold;
@@ -25,7 +26,7 @@ const SignUpText = styled.Text`
   color: ${(props) => props.theme.bgColor};
 `;
 
-export default function SignUp() {
+export default function SignUp({ navigation }: SignUpNavProps) {
   const {
     handleSubmit,
     register,
@@ -33,6 +34,7 @@ export default function SignUp() {
     formState: { errors },
     setError,
     watch,
+    getValues,
   } = useForm<CreateAccountProps>({ mode: "onChange" });
 
   const [createAccount_Mutation, { loading }] = useMutation<
@@ -40,12 +42,19 @@ export default function SignUp() {
     createAccountVariables
   >(CREATE_ACCOUNT_MUTATION, {
     onCompleted: (data) => {
+      const { username, password } = getValues();
       const {
         createAccount: { ok, error },
       } = data;
       if (!ok) {
         setError("result", {
           message: error || undefined,
+        });
+      }
+      if (ok) {
+        navigation.navigate("Login", {
+          username,
+          password,
         });
       }
     },

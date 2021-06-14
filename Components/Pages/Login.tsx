@@ -15,8 +15,10 @@ import { LOGIN_MUTATION } from "../Fragment";
 import { login, loginVariables } from "../../__generated__/login";
 import { LoginProps } from "../Shared/InterFace";
 import ErrorMessage from "../LoginShared/ErrorMessage";
+import { LoginNavProps } from "../../Navigation/NavigationProps";
+import { isLoggedInVar } from "../../Apollo";
 
-export default function Login() {
+export default function Login({ route: { params } }: LoginNavProps) {
   const [login_mutation, { loading }] = useMutation<login, loginVariables>(
     LOGIN_MUTATION,
     {
@@ -29,6 +31,9 @@ export default function Login() {
             message: error || undefined,
           });
         }
+        if (ok) {
+          isLoggedInVar(true);
+        }
       },
     }
   );
@@ -40,7 +45,13 @@ export default function Login() {
     setError,
     watch,
     formState: { errors },
-  } = useForm<LoginProps>({ mode: "onChange" });
+  } = useForm<LoginProps>({
+    mode: "onChange",
+    defaultValues: {
+      username: params?.username || "",
+      password: params?.password || "",
+    },
+  });
 
   useEffect(() => {
     register("username", {
@@ -64,13 +75,13 @@ export default function Login() {
   };
 
   const passwordRef = useRef(null);
-
   return (
     <KeyboardContainer>
       <Logo />
 
       <Form>
         <TextInput
+          value={watch("username")}
           onChangeText={(value) => setValue("username", value)}
           placeholder="UserName"
           placeholderTextColor={reverseModeColor()}
@@ -82,6 +93,7 @@ export default function Login() {
         <ErrorMessage text={errors.username?.message || undefined} />
 
         <TextInput
+          value={watch("password")}
           onChangeText={(value) => setValue("password", value)}
           placeholder="Password"
           placeholderTextColor={reverseModeColor()}
@@ -89,7 +101,7 @@ export default function Login() {
           autoCorrect={false}
           returnKeyType="done"
           secureTextEntry={true}
-          onSubmitEditing={() => handleSubmit(onSubmit)}
+          onSubmitEditing={handleSubmit(onSubmit)}
         />
         <ErrorMessage text={errors.password?.message || undefined} />
       </Form>
