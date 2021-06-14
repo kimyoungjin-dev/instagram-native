@@ -7,7 +7,11 @@ import Feed from "../Components/Pages/Feed";
 import Search from "../Components/Pages/Search";
 import Notifications from "../Components/Pages/Notifications";
 import Me from "../Components/Pages/Me";
-import { modeColor } from "../Components/Shared/SharedFunction";
+import {
+  modeColor,
+  reverseModeColor,
+} from "../Components/Shared/SharedFunction";
+import { Image } from "react-native";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -17,9 +21,28 @@ export default function SharedStackNav({ screenName }: { screenName: string }) {
       screenOptions={{
         headerBackTitleVisible: false,
         headerTintColor: modeColor(),
+        headerStyle: {
+          backgroundColor: reverseModeColor(),
+          shadowOpacity: 0,
+          borderBottomColor: modeColor(),
+        },
       }}
     >
-      {screenName === "Feed" && <Stack.Screen name={"Feed"} component={Feed} />}
+      {screenName === "Feed" && (
+        <Stack.Screen
+          name={"Feed"}
+          component={Feed}
+          options={{
+            headerTitle: () => (
+              <Image
+                source={require("../assets/instagram_logo.png")}
+                resizeMode="contain"
+                style={{ width: 140, height: "100%" }}
+              />
+            ),
+          }}
+        />
+      )}
 
       {screenName === "Search" && (
         <Stack.Screen component={Search} name="Search" />
