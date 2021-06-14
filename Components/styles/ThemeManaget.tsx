@@ -1,8 +1,8 @@
 import React from "react";
-import { ChangeModeProps } from "../Shared/InterFace";
+import { ChildrenProps } from "../Shared/InterFace";
 import { ManageThemeProvider } from "./ChangeMode";
 
-const ThemeManager = ({ children }: ChangeModeProps) => (
+const ThemeManager = ({ children }: ChildrenProps) => (
   <ManageThemeProvider>{children}</ManageThemeProvider>
 );
 
