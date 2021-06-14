@@ -73,3 +73,13 @@ export const FEED_QUERY = gql`
   ${PHOTO_FRAGMENT}
   ${COMMENT_FRAGMENT}
 `;
+
+export const SEE_PHOTO_LIKES = gql`
+  query seePhotoLikes($id: Int!) {
+    seePhotoLikes(id: $id) {
+      id
+      username
+      avatar
+    }
+  }
+`;
