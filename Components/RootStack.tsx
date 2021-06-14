@@ -5,4 +5,7 @@ export type RootStackParamList = {
   Login: loginVariables;
   SignUp: undefined;
   Feed: undefined;
+  Search: undefined;
+  Notifications: undefined;
+  Profile: undefined;
 };
