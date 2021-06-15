@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
 import styled from "styled-components/native";
 import Avatar from "../Shared/Avatar";
-import { useWindowDimensions } from "react-native";
+import {
+  useWindowDimensions,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { Image } from "react-native";
 import { FatText, flexRow_AlignCenter } from "../Shared/SharedStyles";
-import { View } from "react-native";
 import {
   Entypo,
   Ionicons,
@@ -22,6 +26,7 @@ import {
   toggleLike,
   toggleLikeVariables,
 } from "../../__generated__/toggleLike";
+import WriteComments from "./Comments/WriteComments";
 
 const Container = styled.View`
   margin-bottom: 50px;
@@ -169,6 +174,7 @@ export default function Feed_Photo({
           caption={caption}
           photoId={id}
         />
+        <WriteComments photoId={id} comments={comments} user={user} />
       </Contents>
     </Container>
   );
