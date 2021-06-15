@@ -15,11 +15,11 @@ import {
 import Like from "./Like/Like";
 import { modeColor } from "../Shared/SharedFunction";
 import Caption from "./Caption";
-import DarkModeSwitch from "../Shared/DarkModeSwitch";
+import Comments from "../Feed/Comments/Comments";
 
 const Container = styled.View`
   margin-bottom: 50px;
-  border: 1px solid ${(props) => props.theme.borderColor};
+  border: 1px solid ${(props) => props.theme.bgColor};
 `;
 
 const Header = styled(flexRow_AlignCenter)`
@@ -51,12 +51,6 @@ const Icons = styled(flexRow_AlignCenter)`
 
 const LeftIcons = styled(flexRow_AlignCenter)``;
 
-const Likes = styled.Text``;
-
-const CaptionBox = styled.View``;
-
-const CaptionText = styled.Text``;
-
 export default function Feed_Photo({
   file,
   user,
@@ -67,7 +61,6 @@ export default function Feed_Photo({
   caption,
   isLiked,
 }: seeFeed_seeFeed) {
-  console.log(isLiked);
   const { width, height } = useWindowDimensions();
 
   const [imageHeight, setImageHeight] = useState(height - 450);
@@ -79,9 +72,6 @@ export default function Feed_Photo({
 
   return (
     <Container>
-      <View style={{ zIndex: 100 }}>
-        <DarkModeSwitch />
-      </View>
       <Header>
         <UserInfo>
           <Avatar uri={user.avatar} />
@@ -118,22 +108,30 @@ export default function Feed_Photo({
               color={modeColor()}
               style={{ marginRight: 20 }}
             />
+            <Feather name="send" size={30} color={modeColor()} />
+          </LeftIcons>
+
+          <View>
             <Feather
               name="bookmark"
               size={30}
               color={modeColor()}
               style={{ marginRight: 20 }}
             />
-          </LeftIcons>
-
-          <View>
-            <Feather name="send" size={30} color={modeColor()} />
           </View>
         </Icons>
 
         <Like photoId={id} likes={likes} />
 
         <Caption caption={caption} user={user} />
+
+        <Comments
+          commentNumber={commentNumber}
+          comments={comments}
+          user={user}
+          caption={caption}
+          photoId={id}
+        />
       </Contents>
     </Container>
   );
