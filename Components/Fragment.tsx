@@ -124,3 +124,23 @@ export const TOGGLE_LIKE = gql`
     }
   }
 `;
+
+export const CREATE_COMMENT = gql`
+  mutation createComment($photoId: Int!, $payload: String!) {
+    createComment(photoId: $photoId, payload: $payload) {
+      ok
+      id
+      error
+    }
+  }
+`;
+
+export const ME_QUERY = gql`
+  query me {
+    me {
+      id
+      username
+      avatar
+    }
+  }
+`;
