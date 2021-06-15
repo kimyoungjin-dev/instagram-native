@@ -18,7 +18,6 @@ import {
 import { CreateAccountProps } from "../Shared/InterFace";
 import ErrorMessage from "../LoginShared/ErrorMessage";
 import { SignUpNavProps } from "../../Navigation/NavigationProps";
-import { login_login } from "../../__generated__/login";
 
 const SignUpText = styled.Text`
   font-weight: bold;

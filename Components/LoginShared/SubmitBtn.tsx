@@ -3,7 +3,7 @@ import { ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import { SubmitBtnProps } from "../Shared/InterFace";
 
-const Login = styled.TouchableOpacity<{ disabled: boolean }>`
+const Login = styled.TouchableOpacity<{ disabled: boolean | undefined }>`
   border-radius: 5px;
   background-color: ${(props) => (props.disabled ? "skyblue" : "blue")};
   padding: 10px 0px;
@@ -25,7 +25,7 @@ export default function SubmitBtn({
   onPress,
 }: SubmitBtnProps) {
   return (
-    <Login disabled={disabled} onPress={onPress}>
+    <Login disabled={disabled || undefined} onPress={onPress}>
       {loading ? (
         <ActivityIndicator color="white" />
       ) : (

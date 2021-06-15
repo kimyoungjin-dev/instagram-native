@@ -16,7 +16,7 @@ import { login, loginVariables } from "../../__generated__/login";
 import { LoginProps } from "../Shared/InterFace";
 import ErrorMessage from "../LoginShared/ErrorMessage";
 import { LoginNavProps } from "../../Navigation/NavigationProps";
-import { isLoggedInVar, logUserIn } from "../../Apollo";
+import { logUserIn } from "../../Apollo";
 
 export default function Login({ route: { params } }: LoginNavProps) {
   const onCompleted = (data: login) => {

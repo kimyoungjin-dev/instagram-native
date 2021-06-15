@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 import { ChildrenProps } from "../Shared/InterFace";
 import styled from "styled-components/native";
 

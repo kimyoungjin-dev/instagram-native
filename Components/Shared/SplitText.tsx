@@ -1,5 +1,5 @@
 import React from "react";
-import { StringProps } from "./InterFace";
+import { SplitTextProps } from "./InterFace";
 import { ColorText } from "../Shared/SharedStyles";
 import styled from "styled-components/native";
 
@@ -7,7 +7,7 @@ const Text = styled.Text`
   color: ${(props) => props.theme.bgColor};
 `;
 
-export default function SplitText({ text }: StringProps) {
+export default function SplitText({ text }: SplitTextProps) {
   return !text || text === "" ? null : (
     <Text>
       {text

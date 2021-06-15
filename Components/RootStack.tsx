@@ -1,14 +1,12 @@
-import { loginVariables } from "../__generated__/login";
 import {
   seeFeed_seeFeed,
   seeFeed_seeFeed_comments,
   seeFeed_seeFeed_user,
 } from "../__generated__/seeFeed";
-import { LikeProps } from "./Feed/Like/Like";
 
 export type RootStackParamList = {
   Welcome: undefined;
-  Login: loginVariables;
+  Login: { username: string; password: string } | undefined;
   SignUp: undefined;
   Feed: undefined;
   Search: undefined;

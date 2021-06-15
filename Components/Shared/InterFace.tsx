@@ -8,8 +8,8 @@ export interface ChildrenProps {
 
 export interface SubmitBtnProps {
   text: string;
-  loading: boolean;
-  disabled: boolean;
+  loading?: boolean;
+  disabled?: boolean | undefined;
   onPress: ((event: GestureResponderEvent) => void) | undefined;
 }
 
@@ -32,11 +32,16 @@ export interface ErrorMessageProps {
   errorMargin?: boolean;
 }
 
-export interface StringProps {
-  text: string;
+export interface SplitTextProps {
+  text: string | null | undefined;
 }
 
 export interface AvatarProps {
   uri?: string | null | undefined;
   isMargin?: boolean;
+}
+
+export interface ScreenContainerProps {
+  loading: boolean;
+  children: React.ReactNode;
 }
