@@ -41,7 +41,7 @@ export default function WriteComments({
   userAvatar,
   photoId,
 }: WriteCommentsProps) {
-  const { register, handleSubmit, getValues, setValue } =
+  const { register, handleSubmit, getValues, setValue, watch } =
     useForm<createCommentVariables>();
   const { data: userData } = useUser();
   const [createComment] = useMutation<createComment, createCommentVariables>(
@@ -50,7 +50,6 @@ export default function WriteComments({
       update: (cache, result) => {
         const { payload } = getValues();
         setValue("payload", "");
-
         if (result.data?.createComment) {
           const {
             data: {
@@ -124,6 +123,7 @@ export default function WriteComments({
       <Image source={{ uri: userAvatar || undefined }} resizeMode="cover" />
       <Form>
         <TextInput
+          value={watch("payload")}
           placeholder="댓글달기"
           placeholderTextColor={modeColor()}
           autoCapitalize="none"
