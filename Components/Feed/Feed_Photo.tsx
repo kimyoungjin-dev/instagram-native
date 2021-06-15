@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
 import styled from "styled-components/native";
 import Avatar from "../Shared/Avatar";
-import {
-  useWindowDimensions,
-  View,
-  Text,
-  TouchableOpacity,
-} from "react-native";
-import { Image } from "react-native";
+import { useWindowDimensions, View } from "react-native";
 import { FatText, flexRow_AlignCenter } from "../Shared/SharedStyles";
 import {
   Entypo,
@@ -26,7 +20,8 @@ import {
   toggleLike,
   toggleLikeVariables,
 } from "../../__generated__/toggleLike";
-import WriteComments from "./Comments/WriteComments";
+
+import WriteComments from "../Feed/Comments/WriteComments";
 
 const Container = styled.View`
   margin-bottom: 50px;
@@ -61,13 +56,19 @@ const Icons = styled(flexRow_AlignCenter)`
 
 const LeftIcons = styled(flexRow_AlignCenter)``;
 
+//comments
+const Image = styled.Image`
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+`;
+
 export default function Feed_Photo({
   file,
   user,
   id,
   likes,
   commentNumber,
-  comments,
   caption,
   isLiked,
 }: seeFeed_seeFeed) {
@@ -108,8 +109,8 @@ export default function Feed_Photo({
   );
 
   const { width, height } = useWindowDimensions();
-
   const [imageHeight, setImageHeight] = useState(height - 450);
+
   useEffect(() => {
     Image.getSize(file, (_, height) => {
       setImageHeight(height / 3);
@@ -169,12 +170,11 @@ export default function Feed_Photo({
 
         <Comments
           commentNumber={commentNumber}
-          comments={comments}
           user={user}
           caption={caption}
           photoId={id}
         />
-        <WriteComments photoId={id} comments={comments} user={user} />
+        <WriteComments userAvatar={user.avatar} photoId={id} />
       </Contents>
     </Container>
   );
