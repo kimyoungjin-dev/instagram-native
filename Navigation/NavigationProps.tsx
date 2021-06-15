@@ -36,3 +36,14 @@ export type LikesMemberNavProps = {
   navigation: LikesMemberScreenNav;
   route: LikesMemberRouteProp;
 };
+
+//(CommentsCommentsMember)
+type CommentsMemberScreenNav = StackScreenProps<
+  RootStackParamList,
+  "CommentsMember"
+>;
+type CommentsMemberRouteProp = RouteProp<RootStackParamList, "CommentsMember">;
+export type CommentsMemberNavProps = {
+  navigation: CommentsMemberScreenNav;
+  route: CommentsMemberRouteProp;
+};

@@ -13,6 +13,7 @@ import {
 } from "../Components/Shared/SharedFunction";
 import { Image } from "react-native";
 import LikesMember from "../Components/Feed/Like/LikesMember";
+import CommentsMember from "../Components/Feed/Comments/CommentsMember";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -61,6 +62,12 @@ export default function SharedStackNav({ screenName }: { screenName: string }) {
         name="LikesMember"
         component={LikesMember}
         options={{ headerTitle: "좋아요", headerTintColor: modeColor() }}
+      />
+
+      <Stack.Screen
+        name="CommentsMember"
+        component={CommentsMember}
+        options={{ headerTitle: "댓글", headerTintColor: modeColor() }}
       />
     </Stack.Navigator>
   );

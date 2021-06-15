@@ -83,3 +83,22 @@ export const SEE_PHOTO_LIKES = gql`
     }
   }
 `;
+
+export const SEE_PHOTO_COMMENTS = gql`
+  query seePhotoComments($id: Int!, $lastId: Int) {
+    seePhotoComments(id: $id, lastId: $lastId) {
+      id
+      user {
+        id
+        username
+        avatar
+      }
+      photo {
+        ...PhotoFragment
+      }
+      payload
+      isMine
+    }
+  }
+  ${PHOTO_FRAGMENT}
+`;
