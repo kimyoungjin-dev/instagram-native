@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { seeFeed_seeFeed } from "../../../__generated__/seeFeed";
 import styled from "styled-components/native";
-import CommentsMember from "./CommentsMember";
 import { useNavigation } from "@react-navigation/native";
 
 interface CommentsPick {
