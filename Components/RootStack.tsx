@@ -16,9 +16,11 @@ export type RootStackParamList = {
   Me: undefined;
   Photo: undefined;
 
+  //likes
   Like: undefined;
   LikesMember: { photoId: number };
 
+  //comments
   Comments: undefined;
   CommentsMember: {
     comments: (seeFeed_seeFeed_comments | null)[] | null;
@@ -27,4 +29,6 @@ export type RootStackParamList = {
     photoId: seeFeed_seeFeed["id"];
     commentNumber: number;
   };
+
+  Hashtag: { hashtag: string };
 };

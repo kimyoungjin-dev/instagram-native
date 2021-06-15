@@ -43,7 +43,17 @@ type CommentsMemberScreenNav = StackScreenProps<
   "CommentsMember"
 >;
 type CommentsMemberRouteProp = RouteProp<RootStackParamList, "CommentsMember">;
+
 export type CommentsMemberNavProps = {
   navigation: CommentsMemberScreenNav;
   route: CommentsMemberRouteProp;
+};
+
+//hashtag
+type HashtagScreenNav = StackScreenProps<RootStackParamList, "Hashtag">;
+type HashtagScreenNavRouteProp = RouteProp<RootStackParamList, "Hashtag">;
+
+export type HashtagScreenNavProps = {
+  navigation: HashtagScreenNav;
+  route: HashtagScreenNavRouteProp;
 };

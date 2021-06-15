@@ -102,3 +102,17 @@ export const SEE_PHOTO_COMMENTS = gql`
   }
   ${PHOTO_FRAGMENT}
 `;
+
+export const SEE_HASH_TAGS = gql`
+  query seeHashtag($hashtag: String!) {
+    seeHashtag(hashtag: $hashtag) {
+      id
+      hashtag
+      totalPhotos
+      photos {
+        ...PhotoFragment
+      }
+    }
+  }
+  ${PHOTO_FRAGMENT}
+`;

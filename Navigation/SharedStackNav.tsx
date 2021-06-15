@@ -14,6 +14,7 @@ import {
 import { Image } from "react-native";
 import LikesMember from "../Components/Feed/Like/LikesMember";
 import CommentsMember from "../Components/Feed/Comments/CommentsMember";
+import Hashtag from "../Components/Feed/Hashtag/Hashtag";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -57,6 +58,7 @@ export default function SharedStackNav({ screenName }: { screenName: string }) {
       {screenName === "Me" && <Stack.Screen component={Me} name="Me" />}
 
       <Stack.Screen name="Photo" component={Photo} />
+
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen
         name="LikesMember"
@@ -68,6 +70,12 @@ export default function SharedStackNav({ screenName }: { screenName: string }) {
         name="CommentsMember"
         component={CommentsMember}
         options={{ headerTitle: "댓글", headerTintColor: modeColor() }}
+      />
+
+      <Stack.Screen
+        name="Hashtag"
+        component={Hashtag}
+        options={{ headerTitle: "해쉬테그", headerTintColor: modeColor() }}
       />
     </Stack.Navigator>
   );
