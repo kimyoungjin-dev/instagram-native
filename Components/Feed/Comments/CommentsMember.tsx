@@ -5,32 +5,23 @@ import { SEE_PHOTO_COMMENTS } from "../../Fragment";
 import ScreenContainer from "../../Shared/ScreenContainer";
 import { FlatList, View } from "react-native";
 import styled from "styled-components/native";
-import {
-  defaultBox,
-  FatText,
-  flexRow_AlignCenter,
-} from "../../Shared/SharedStyles";
+import { FatText, flexRow_AlignCenter } from "../../Shared/SharedStyles";
 import {
   seePhotoComments,
   seePhotoCommentsVariables,
 } from "../../../__generated__/seePhotoComments";
-import { ColorText } from "../../Shared/SharedStyles";
 import Avatar from "../../Shared/Avatar";
 import SplitText from "../../Shared/SplitText";
 
 //last Id 구현
 
-const Container = styled(defaultBox)``;
-
 const SView = styled(flexRow_AlignCenter)`
-  margin-bottom: 30px;
+  margin-bottom: 100px;
 `;
 
 const Text = styled.Text`
   color: black;
 `;
-
-const ZeroComments = styled.View``;
 
 const UserComments = styled(flexRow_AlignCenter)`
   border: 1px solid ${(props) => props.theme.borderColor};
@@ -77,6 +68,7 @@ export default function CommentsMember({
                     <SplitText text={caption} />
                   </View>
                 </SView>
+
                 <UserComments>
                   <Avatar
                     uri={item?.user.avatar || undefined}
