@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { TextInput } from "react-native";
+import { TextInput, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import { flexRow_AlignCenter } from "../../Shared/SharedStyles";
 import {
@@ -15,6 +15,7 @@ import {
 import { CREATE_COMMENT } from "../../Fragment";
 import { gql, useMutation } from "@apollo/client";
 import { modeColor } from "../../Shared/SharedFunction";
+import { useNavigation } from "@react-navigation/native";
 
 const Container = styled(flexRow_AlignCenter)``;
 
@@ -118,9 +119,20 @@ export default function WriteComments({
       },
     });
   };
+
+  const { navigate } = useNavigation();
+
+  const goToPropfile = () => {
+    navigate("Profile", {
+      username: userData?.me?.username,
+    });
+  };
+
   return (
     <Container>
-      <Image source={{ uri: userAvatar || undefined }} resizeMode="cover" />
+      <TouchableOpacity onPress={() => goToPropfile()}>
+        <Image source={{ uri: userAvatar || undefined }} resizeMode="cover" />
+      </TouchableOpacity>
       <Form>
         <TextInput
           value={watch("payload")}

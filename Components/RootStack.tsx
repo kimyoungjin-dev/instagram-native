@@ -11,7 +11,8 @@ export type RootStackParamList = {
   Feed: undefined;
   Search: undefined;
   Notifications: undefined;
-  Profile: undefined;
+  //Profile
+  Profile: { username: string };
   Camera: undefined;
   Me: undefined;
   Photo: undefined;

@@ -8,7 +8,8 @@ const Container = styled(defaultBox)`
   background-color: ${(props) => props.theme.fontColor};
 `;
 
-export default function Profile({ navigation }: ProfileNavProps) {
+export default function Profile({ route: { params } }: ProfileNavProps) {
+  console.log(params);
   return (
     <Container>
       <Text>Profile</Text>

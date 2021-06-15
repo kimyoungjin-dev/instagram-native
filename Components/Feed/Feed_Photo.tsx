@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
 import styled from "styled-components/native";
 import Avatar from "../Shared/Avatar";
-import { useWindowDimensions, View } from "react-native";
+import { useWindowDimensions, View, TouchableOpacity } from "react-native";
 import { FatText, flexRow_AlignCenter } from "../Shared/SharedStyles";
 import {
   Entypo,
@@ -22,6 +22,7 @@ import {
 } from "../../__generated__/toggleLike";
 
 import WriteComments from "../Feed/Comments/WriteComments";
+import { useNavigation } from "@react-navigation/native";
 
 const Container = styled.View`
   margin-bottom: 50px;
@@ -117,12 +118,23 @@ export default function Feed_Photo({
     });
   }, [file]);
 
+  const { navigate } = useNavigation();
+
+  const gotoPropfile = () => {
+    navigate("Profile", {
+      username: user.username,
+    });
+  };
+
   return (
     <Container>
       <Header>
         <UserInfo>
-          <Avatar uri={user.avatar} />
-          <Username>{user.username}</Username>
+          <TouchableOpacity onPress={gotoPropfile}>
+            <Avatar uri={user.avatar} />
+          </TouchableOpacity>
+
+          <Username onPress={gotoPropfile}>{user.username}</Username>
         </UserInfo>
 
         <View>

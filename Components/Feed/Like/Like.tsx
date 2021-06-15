@@ -4,13 +4,14 @@ import { seeFeed_seeFeed } from "../../../__generated__/seeFeed";
 import {
   seePhotoLikes,
   seePhotoLikesVariables,
+  seePhotoLikes_seePhotoLikes,
 } from "../../../__generated__/seePhotoLikes";
 import { SEE_PHOTO_LIKES } from "../../Fragment";
 import Avatar from "../../Shared/Avatar";
 import styled from "styled-components/native";
 import { FatText, flexRow_AlignCenter } from "../../Shared/SharedStyles";
 import { useNavigation } from "@react-navigation/native";
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 const TotalLikesUser = styled(flexRow_AlignCenter)`
   margin: 10px 0px;
@@ -28,7 +29,7 @@ export interface LikeProps {
 }
 
 export default function Like({ likes, photoId }: LikeProps) {
-  const navigation = useNavigation();
+  const { navigate } = useNavigation();
   const { data } = useQuery<seePhotoLikes, seePhotoLikesVariables>(
     SEE_PHOTO_LIKES,
     {
@@ -37,6 +38,18 @@ export default function Like({ likes, photoId }: LikeProps) {
       },
     }
   );
+
+  const goToProfile = (username: string | undefined) => {
+    navigate("Profile", {
+      username,
+    });
+  };
+
+  const goToLikesMember = (photoId: number) => {
+    navigate("LikesMember", {
+      photoId,
+    });
+  };
 
   return (
     <>
@@ -52,12 +65,12 @@ export default function Like({ likes, photoId }: LikeProps) {
           return (
             <TotalLikesUser key={item?.id}>
               <SView>
-                <Avatar uri={item?.avatar} isMargin={true} />
+                <TouchableOpacity onPress={() => goToProfile(item?.username)}>
+                  <Avatar uri={item?.avatar} isMargin={true} />
+                </TouchableOpacity>
 
                 <SView>
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate("Profile")}
-                  >
+                  <TouchableOpacity onPress={() => goToProfile(item?.username)}>
                     <FatText>{item?.username}</FatText>
                   </TouchableOpacity>
 
@@ -72,18 +85,17 @@ export default function Like({ likes, photoId }: LikeProps) {
           return (
             index === 0 && (
               <TotalLikesUser key={item?.id}>
-                <Avatar uri={item?.avatar} isMargin={true} />
+                <TouchableOpacity onPress={() => goToProfile(item?.username)}>
+                  <Avatar uri={item?.avatar} isMargin={true} />
+                </TouchableOpacity>
 
                 <SView>
                   <Text>
-                    {item?.username}님 외에{" "}
-                    <Text
-                      onPress={() =>
-                        navigation.navigate("LikesMember", {
-                          photoId,
-                        })
-                      }
-                    >
+                    <FatText onPress={() => goToProfile(item?.username)}>
+                      {item?.username}
+                    </FatText>
+                    님 외에{" "}
+                    <Text onPress={() => goToLikesMember(photoId)}>
                       <FatText>{likes - 1}</FatText>
                     </Text>
                     명이 좋아요를 좋아합니다.

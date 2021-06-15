@@ -4,20 +4,24 @@ import { LikesMemberNavProps } from "../../../Navigation/NavigationProps";
 import {
   seePhotoLikes,
   seePhotoLikesVariables,
+  seePhotoLikes_seePhotoLikes,
 } from "../../../__generated__/seePhotoLikes";
 import { SEE_PHOTO_LIKES } from "../../Fragment";
 import ScreenContainer from "../../Shared/ScreenContainer";
-import { FlatList } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import { FatText, flexRow_AlignCenter } from "../../Shared/SharedStyles";
+import { useNavigation } from "@react-navigation/native";
 
 const Container = styled(flexRow_AlignCenter)`
-  margin-bottom: 10px;
+  margin-bottom: 30px;
+  margin-left: 15px;
 `;
 
 const Form = styled.View`
   width: 100%;
-  margin: 20px 0px;
+  padding: 10px;
+  margin-bottom: 20px;
 `;
 
 const TextInput = styled.TextInput`
@@ -50,6 +54,8 @@ export default function LikesMember({
     }
   );
 
+  const { navigate } = useNavigation();
+
   return (
     <ScreenContainer loading={loading}>
       <Form>
@@ -63,8 +69,23 @@ export default function LikesMember({
         renderItem={({ item }) => {
           return (
             <Container>
-              <Image source={{ uri: item?.avatar || undefined }} />
-              <FatText>{item?.username}</FatText>
+              <TouchableOpacity
+                onPress={() =>
+                  navigate("Profile", { username: item?.username })
+                }
+              >
+                <Image source={{ uri: item?.avatar || undefined }} />
+              </TouchableOpacity>
+
+              <FatText
+                onPress={() =>
+                  navigate("Profile", {
+                    username: item?.username,
+                  })
+                }
+              >
+                {item?.username}
+              </FatText>
             </Container>
           );
         }}

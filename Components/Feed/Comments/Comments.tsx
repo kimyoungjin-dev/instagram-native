@@ -23,21 +23,21 @@ export default function Comments({
 }: CommentsPick) {
   const [isShow] = useState(false);
 
+  const goToCommentsMember = () => {
+    navigate("CommentsMember", {
+      caption,
+      user,
+      photoId,
+      commentNumber,
+    });
+  };
+
   const { navigate } = useNavigation();
   return (
     <View style={{ marginBottom: 20 }}>
       {isShow ? null : (
         <View>
-          <Text
-            onPress={() =>
-              navigate("CommentsMember", {
-                caption,
-                user,
-                photoId,
-                commentNumber,
-              })
-            }
-          >
+          <Text onPress={() => goToCommentsMember()}>
             댓글 {commentNumber}개 모두 보기
           </Text>
         </View>
