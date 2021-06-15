@@ -16,6 +16,12 @@ import Like from "./Like/Like";
 import { modeColor } from "../Shared/SharedFunction";
 import Caption from "./Caption";
 import Comments from "../Feed/Comments/Comments";
+import { useMutation } from "@apollo/client";
+import { TOGGLE_LIKE } from "../Fragment";
+import {
+  toggleLike,
+  toggleLikeVariables,
+} from "../../__generated__/toggleLike";
 
 const Container = styled.View`
   margin-bottom: 50px;
@@ -60,6 +66,42 @@ export default function Feed_Photo({
   caption,
   isLiked,
 }: seeFeed_seeFeed) {
+  const [toggle_like_mutation] = useMutation<toggleLike, toggleLikeVariables>(
+    TOGGLE_LIKE,
+    {
+      variables: {
+        id,
+      },
+
+      update: (cache, result) => {
+        if (result.data?.toggleLike) {
+          const {
+            data: {
+              toggleLike: { ok },
+            },
+          } = result;
+          if (!ok) {
+            return null;
+          }
+          if (ok) {
+            cache.modify({
+              id: `Photo:${id}`,
+              fields: {
+                isLiked(prev) {
+                  return !prev;
+                },
+
+                likes(prev) {
+                  return isLiked ? prev - 1 : prev + 1;
+                },
+              },
+            });
+          }
+        }
+      },
+    }
+  );
+
   const { width, height } = useWindowDimensions();
 
   const [imageHeight, setImageHeight] = useState(height - 450);
@@ -92,9 +134,10 @@ export default function Feed_Photo({
         <Icons>
           <LeftIcons>
             <Ionicons
+              onPress={() => toggle_like_mutation()}
               name={isLiked ? "heart" : "heart-outline"}
               size={30}
-              color={modeColor()}
+              color={isLiked ? "tomato" : "black"}
               style={{ marginRight: 20 }}
             />
             <MaterialCommunityIcons

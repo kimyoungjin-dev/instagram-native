@@ -116,3 +116,11 @@ export const SEE_HASH_TAGS = gql`
   }
   ${PHOTO_FRAGMENT}
 `;
+export const TOGGLE_LIKE = gql`
+  mutation toggleLike($id: Int!) {
+    toggleLike(id: $id) {
+      ok
+      error
+    }
+  }
+`;
