@@ -37,13 +37,15 @@ const Image = styled.Image`
 //search bar 추가
 //팔로윙 팔로우 구현
 export default function LikesMember({
-  route: { params },
+  route: {
+    params: { photoId },
+  },
 }: LikesMemberNavProps) {
   const { data, loading } = useQuery<seePhotoLikes, seePhotoLikesVariables>(
     SEE_PHOTO_LIKES,
     {
       variables: {
-        id: params?.photoId,
+        id: photoId,
       },
     }
   );
