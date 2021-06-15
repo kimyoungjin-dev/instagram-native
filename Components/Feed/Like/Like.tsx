@@ -10,13 +10,17 @@ import Avatar from "../../Shared/Avatar";
 import styled from "styled-components/native";
 import { FatText, flexRow_AlignCenter } from "../../Shared/SharedStyles";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 
 const TotalLikesUser = styled(flexRow_AlignCenter)`
   margin: 10px 0px;
 `;
 
 const SView = styled(flexRow_AlignCenter)``;
+
+const Text = styled.Text`
+  color: ${(props) => props.theme.bgColor};
+`;
 
 export interface LikeProps {
   likes: seeFeed_seeFeed["likes"];
