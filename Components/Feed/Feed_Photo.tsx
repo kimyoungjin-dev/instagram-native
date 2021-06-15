@@ -19,7 +19,6 @@ import Comments from "../Feed/Comments/Comments";
 
 const Container = styled.View`
   margin-bottom: 50px;
-  border: 1px solid ${(props) => props.theme.bgColor};
 `;
 
 const Header = styled(flexRow_AlignCenter)`
@@ -112,12 +111,7 @@ export default function Feed_Photo({
           </LeftIcons>
 
           <View>
-            <Feather
-              name="bookmark"
-              size={30}
-              color={modeColor()}
-              style={{ marginRight: 20 }}
-            />
+            <Feather name="bookmark" size={30} color={modeColor()} />
           </View>
         </Icons>
 

@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 import SplitText from "../Shared/SplitText";
 
 const Container = styled(flexRow_AlignCenter)`
-  margin: 14px 0px;
+  margin: 10px 0px;
 `;
 
 const UserName = styled(FatText)`
