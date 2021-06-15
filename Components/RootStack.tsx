@@ -23,7 +23,6 @@ export type RootStackParamList = {
   //comments
   Comments: undefined;
   CommentsMember: {
-    comments: (seeFeed_seeFeed_comments | null)[] | null;
     caption: string | null;
     user: seeFeed_seeFeed_user;
     photoId: seeFeed_seeFeed["id"];

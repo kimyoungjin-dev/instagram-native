@@ -12,11 +12,14 @@ import {
 } from "../../../__generated__/seePhotoComments";
 import Avatar from "../../Shared/Avatar";
 import SplitText from "../../Shared/SplitText";
+import { AntDesign } from "@expo/vector-icons";
 
 //last Id 구현
 
+const Container = styled.View``;
+
 const SView = styled(flexRow_AlignCenter)`
-  margin-bottom: 100px;
+  margin: 30px 0px 100px 0px;
 `;
 
 const Text = styled.Text`
@@ -25,12 +28,29 @@ const Text = styled.Text`
 
 const UserComments = styled(flexRow_AlignCenter)`
   border: 1px solid ${(props) => props.theme.borderColor};
-  padding: 10px;
+  padding: 20px;
+  border-radius: 5px;
+`;
+
+const UserName = styled(FatText)`
+  margin-right: 20px;
+`;
+
+const CommentIcon = styled.View`
+  flex-direction: row;
+  align-items: flex-start;
+`;
+
+const CommentText = styled.Text`
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+  margin-right: 6px;
 `;
 
 export default function CommentsMember({
   route: {
-    params: { photoId, caption, comments, user, commentNumber },
+    params: { photoId, caption, user, commentNumber },
   },
 }: CommentsMemberNavProps) {
   console.log(commentNumber);
@@ -49,39 +69,45 @@ export default function CommentsMember({
     <ScreenContainer loading={loading}>
       {commentNumber === 0 ? (
         <View>
-          <Text>댓글이 없습니다.</Text>
+          <Text>댓글이 없습니다</Text>
         </View>
       ) : (
-        <FlatList
-          data={data?.seePhotoComments}
-          style={{ width: "100%" }}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => "" + item?.id}
-          renderItem={({ item }) => {
-            return (
-              <View>
-                <SView>
-                  <Avatar uri={user.avatar || undefined} isMargin={true} />
+        <Container>
+          <SView>
+            <Avatar uri={user.avatar || undefined} isMargin={true} />
+            <View>
+              <FatText>{user.username}</FatText>
+              <SplitText text={caption} />
+            </View>
+          </SView>
 
-                  <View>
-                    <FatText>{user.username}</FatText>
-                    <SplitText text={caption} />
-                  </View>
-                </SView>
+          <CommentIcon>
+            <CommentText>댓글</CommentText>
+            <AntDesign name="message1" size={20} color="black" />
+          </CommentIcon>
 
-                <UserComments>
-                  <Avatar
-                    uri={item?.user.avatar || undefined}
-                    isMargin={true}
-                  />
+          <FlatList
+            data={data?.seePhotoComments}
+            style={{ width: "100%" }}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item) => "" + item?.id}
+            renderItem={({ item }) => {
+              return (
+                <View style={{ marginBottom: 20 }}>
+                  <UserComments>
+                    <Avatar
+                      uri={item?.user.avatar || undefined}
+                      isMargin={true}
+                    />
 
-                  <FatText>{item?.user.username}</FatText>
-                  <SplitText text={item?.payload} />
-                </UserComments>
-              </View>
-            );
-          }}
-        />
+                    <UserName>{item?.user.username}</UserName>
+                    <SplitText text={item?.payload} />
+                  </UserComments>
+                </View>
+              );
+            }}
+          />
+        </Container>
       )}
     </ScreenContainer>
   );

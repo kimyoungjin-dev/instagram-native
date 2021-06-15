@@ -6,7 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 
 interface CommentsPick {
   commentNumber: seeFeed_seeFeed["commentNumber"];
-  comments: seeFeed_seeFeed["comments"];
   user: seeFeed_seeFeed["user"];
   caption: seeFeed_seeFeed["caption"];
   photoId: seeFeed_seeFeed["id"];
@@ -18,7 +17,6 @@ const Text = styled.Text`
 
 export default function Comments({
   commentNumber,
-  comments,
   caption,
   user,
   photoId,
@@ -27,14 +25,13 @@ export default function Comments({
 
   const { navigate } = useNavigation();
   return (
-    <View>
+    <View style={{ marginBottom: 20 }}>
       {isShow ? null : (
         <View>
           <Text
             onPress={() =>
               navigate("CommentsMember", {
                 caption,
-                comments,
                 user,
                 photoId,
                 commentNumber,
